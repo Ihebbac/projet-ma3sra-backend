@@ -35,9 +35,13 @@ let EmployeService = class EmployeService {
         return employe;
     }
     async update(id, updateEmployeDto) {
-        const employe = await this.employeModel.findByIdAndUpdate(id, updateEmployeDto, { new: true }).exec();
-        if (!employe)
-            throw new common_1.NotFoundException('Employé non trouvé');
+        const employe = await this.employeModel.findByIdAndUpdate(id, {
+            ...updateEmployeDto,
+            updatedAt: new Date()
+        }, { new: true, runValidators: true });
+        if (!employe) {
+            throw new common_1.NotFoundException(`Employé avec l'ID ${id} non trouvé`);
+        }
         return employe;
     }
     async remove(id) {

@@ -28,10 +28,22 @@ export class EmployeService {
   }
 
   async update(id: string, updateEmployeDto: UpdateEmployeDto): Promise<Employe> {
-    const employe = await this.employeModel.findByIdAndUpdate(id, updateEmployeDto, { new: true }).exec();
-    if (!employe) throw new NotFoundException('Employé non trouvé');
+    const employe = await this.employeModel.findByIdAndUpdate(
+      id,
+      { 
+        ...updateEmployeDto,
+        updatedAt: new Date()
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!employe) {
+      throw new NotFoundException(`Employé avec l'ID ${id} non trouvé`);
+    }
+
     return employe;
   }
+
 
   async remove(id: string): Promise<void> {
     const result = await this.employeModel.findByIdAndDelete(id).exec();

@@ -30,7 +30,10 @@ let EmployeController = class EmployeController {
     findOne(id) {
         return this.employeService.findOne(id);
     }
-    update(id, updateEmployeDto) {
+    updatePut(id, updateEmployeDto) {
+        return this.employeService.update(id, updateEmployeDto);
+    }
+    updatePatch(id, updateEmployeDto) {
         return this.employeService.update(id, updateEmployeDto);
     }
     remove(id) {
@@ -67,13 +70,21 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], EmployeController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_employe_dto_1.UpdateEmployeDto]),
+    __metadata("design:returntype", void 0)
+], EmployeController.prototype, "updatePut", null);
+__decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_employe_dto_1.UpdateEmployeDto]),
     __metadata("design:returntype", void 0)
-], EmployeController.prototype, "update", null);
+], EmployeController.prototype, "updatePatch", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),

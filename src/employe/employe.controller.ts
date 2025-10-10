@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Put, Query } from '@nestjs/common';
 import { EmployeService } from './employe.service';
 import { CreateEmployeDto } from './dto/create-employe.dto';
 import { UpdateEmployeDto } from './dto/update-employe.dto';
@@ -22,8 +22,14 @@ export class EmployeController {
     return this.employeService.findOne(id);
   }
 
+  // Ajouter la méthode PUT en plus de PATCH
+  @Put(':id')
+  updatePut(@Param('id') id: string, @Body() updateEmployeDto: UpdateEmployeDto) {
+    return this.employeService.update(id, updateEmployeDto);
+  }
+
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployeDto: UpdateEmployeDto) {
+  updatePatch(@Param('id') id: string, @Body() updateEmployeDto: UpdateEmployeDto) {
     return this.employeService.update(id, updateEmployeDto);
   }
 

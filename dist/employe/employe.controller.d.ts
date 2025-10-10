@@ -7,7 +7,8 @@ export declare class EmployeController {
     create(createEmployeDto: CreateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
     findAll(): Promise<import("../schema/employe.schema").Employe[]>;
     findOne(id: string): Promise<import("../schema/employe.schema").Employe>;
-    update(id: string, updateEmployeDto: UpdateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
+    updatePut(id: string, updateEmployeDto: UpdateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
+    updatePatch(id: string, updateEmployeDto: UpdateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
     remove(id: string): Promise<void>;
     markPresence(id: string): Promise<import("../schema/employe.schema").Employe>;
     calculSalaire(id: string, start?: string, end?: string): Promise<number>;
