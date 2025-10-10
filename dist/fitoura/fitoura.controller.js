@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const fitoura_service_1 = require("./fitoura.service");
 const create_fitoura_dto_1 = require("./dto/create-fitoura.dto");
 const update_fitoura_dto_1 = require("./dto/update-fitoura.dto");
+const update_fitoura_manuelle_dto_ts_1 = require("./dto/update-fitoura-manuelle.dto.ts");
 let FitouraController = class FitouraController {
     constructor(fitouraService) {
         this.fitouraService = fitouraService;
@@ -26,6 +27,9 @@ let FitouraController = class FitouraController {
     }
     updateSortie(id, dto) {
         return this.fitouraService.enregistrerSortie(id, dto);
+    }
+    modifierFitouraManuellement(id, dto) {
+        return this.fitouraService.modifierFitouraManuellement(id, dto);
     }
     findAll() {
         return this.fitouraService.findAll();
@@ -53,6 +57,14 @@ __decorate([
     __metadata("design:paramtypes", [String, update_fitoura_dto_1.UpdateFitouraDto]),
     __metadata("design:returntype", void 0)
 ], FitouraController.prototype, "updateSortie", null);
+__decorate([
+    (0, common_1.Put)('modifier/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_fitoura_manuelle_dto_ts_1.UpdateFitouraManuelleDto]),
+    __metadata("design:returntype", void 0)
+], FitouraController.prototype, "modifierFitouraManuellement", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

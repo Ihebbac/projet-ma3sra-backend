@@ -43,6 +43,20 @@ let FitouraService = class FitouraService {
         operation.status = 'TERMINE';
         return operation.save();
     }
+    async modifierFitouraManuellement(id, dto) {
+        const operation = await this.fitouraModel.findById(id);
+        if (!operation)
+            throw new common_1.NotFoundException('Fitoura non trouvée');
+        Object.assign(operation, dto);
+        if (dto.poidsEntree !== undefined && dto.poidsSortie !== undefined && dto.prixUnitaire !== undefined) {
+            const poidsNet = dto.poidsSortie - dto.poidsEntree;
+            const montantTotal = poidsNet * dto.prixUnitaire;
+            operation.poidsNet = poidsNet;
+            operation.montantTotal = montantTotal;
+        }
+        operation.updatedAt = new Date();
+        return operation.save();
+    }
     async findAll() {
         return this.fitouraModel.find().sort({ createdAt: -1 });
     }

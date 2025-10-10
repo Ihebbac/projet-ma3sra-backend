@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { FitouraInterface } from '../interfaces/fitoura.interface';
 import { CreateFitouraDto } from './dto/create-fitoura.dto';
 import { UpdateFitouraDto } from './dto/update-fitoura.dto';
+import { UpdateFitouraManuelleDto } from './dto/update-fitoura-manuelle.dto.ts';
 
 @Injectable()
 export class FitouraService {
@@ -11,7 +12,7 @@ export class FitouraService {
     @InjectModel('Fitoura') private readonly fitouraModel: Model<FitouraInterface>,
   ) {}
 
-  // Entrée du camion
+  // 🚚 Entrée du camion
   async enregistrerEntree(dto: CreateFitouraDto): Promise<FitouraInterface> {
     const newOp = new this.fitouraModel({
       matriculeCamion: dto.matriculeCamion,
@@ -23,7 +24,7 @@ export class FitouraService {
     return await newOp.save();
   }
 
-  // Sortie du camion
+  // 🚛 Sortie du camion (méthode existante)
   async enregistrerSortie(id: string, dto: UpdateFitouraDto): Promise<FitouraInterface> {
     const operation = await this.fitouraModel.findById(id);
     if (!operation) throw new NotFoundException('Opération non trouvée');
@@ -37,6 +38,26 @@ export class FitouraService {
     operation.dateSortie = new Date();
     operation.status = 'TERMINE';
 
+    return operation.save();
+  }
+
+  // ✅ Nouvelle méthode pour mise à jour manuelle complète
+  async modifierFitouraManuellement(id: string, dto: UpdateFitouraManuelleDto): Promise<FitouraInterface> {
+    const operation = await this.fitouraModel.findById(id);
+    if (!operation) throw new NotFoundException('Fitoura non trouvée');
+
+    // On met à jour uniquement les champs fournis dans le body
+    Object.assign(operation, dto);
+
+    // Si poidsEntree et poidsSortie sont définis, on recalcule automatiquement le net et total
+    if (dto.poidsEntree !== undefined && dto.poidsSortie !== undefined && dto.prixUnitaire !== undefined) {
+      const poidsNet = dto.poidsSortie - dto.poidsEntree;
+      const montantTotal = poidsNet * dto.prixUnitaire;
+      operation.poidsNet = poidsNet;
+      operation.montantTotal = montantTotal;
+    }
+
+    operation.updatedAt = new Date();
     return operation.save();
   }
 
