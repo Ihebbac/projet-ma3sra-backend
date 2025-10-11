@@ -24,25 +24,21 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from "mongoose";
-export declare class Proprietaire {
-    nomPrenom: string;
-    dateCreation: Date;
-    nombreCaisses: number;
-    quantiteOlive: number;
-    quantiteHuile: number;
-    kattou3: number;
-    nisba: number;
-    stockRestant: number;
-    transactions: {
-        date: Date;
-        type: 'huile' | 'olive';
-        quantite: number;
-        operation: 'ajout' | 'retrait';
-    }[];
+export declare class Transaction {
+    date: Date;
+    typeStock: string;
+    quantite: number;
+    clientNom: string;
+    motif: string;
+    details: string;
+    proprietaireId: string;
+    clientId: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
-export declare const ProprietaireSchema: import("mongoose").Schema<Proprietaire, import("mongoose").Model<Proprietaire, any, any, any, Document<unknown, any, Proprietaire> & Proprietaire & {
+export declare const TransactionSchema: import("mongoose").Schema<Transaction, import("mongoose").Model<Transaction, any, any, any, Document<unknown, any, Transaction> & Transaction & {
     _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Proprietaire, Document<unknown, {}, import("mongoose").FlatRecord<Proprietaire>> & import("mongoose").FlatRecord<Proprietaire> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Transaction, Document<unknown, {}, import("mongoose").FlatRecord<Transaction>> & import("mongoose").FlatRecord<Transaction> & {
     _id: import("mongoose").Types.ObjectId;
 }>;
-export type ProprietaireDocument = Proprietaire & Document;
+export type TransactionDocument = Transaction & Document;

@@ -5,7 +5,6 @@ import { Document } from "mongoose";
 export class Proprietaire {
   @Prop({ required: true })
   nomPrenom: string;
- 
 
   @Prop({ default: Date.now })
   dateCreation: Date;
@@ -14,16 +13,38 @@ export class Proprietaire {
   nombreCaisses: number;
 
   @Prop({ default: 0 })
-  quantiteOlive: number; 
+  quantiteOlive: number;
 
   @Prop({ default: 0 })
-  quantiteHuile: number; 
+  quantiteHuile: number;
 
   @Prop({ default: 0 })
-  kattou3: number; 
+  kattou3: number;
 
   @Prop({ default: 0 })
-  nisba: number; 
+  nisba: number;
+
+  @Prop({ default: 0 })
+  stockRestant: number;
+
+  // ✅ Correction du type des transactions pour correspondre au service
+  @Prop({
+    type: [
+      {
+        date: { type: Date, default: Date.now },
+        type: { type: String, enum: ['huile', 'olive'], required: true },
+        quantite: { type: Number, required: true },
+        operation: { type: String, enum: ['ajout', 'retrait'], required: true },
+      },
+    ],
+    default: [],
+  })
+  transactions: {
+    date: Date;
+    type: 'huile' | 'olive';
+    quantite: number;
+    operation: 'ajout' | 'retrait';
+  }[];
 }
 
 export const ProprietaireSchema = SchemaFactory.createForClass(Proprietaire);

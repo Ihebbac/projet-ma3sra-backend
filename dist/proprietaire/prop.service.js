@@ -58,6 +58,35 @@ let ProprietairesService = class ProprietairesService {
         }
         return { message: `Proprietaire with ID ${id} deleted successfully.` };
     }
+    async updateStock(id, type, quantite, operation) {
+        const proprietaire = await this.proprietaireModel.findById(id).exec();
+        if (!proprietaire) {
+            throw new common_1.NotFoundException(`Proprietaire with ID ${id} not found for stock update.`);
+        }
+        if (type === 'huile') {
+            proprietaire.quantiteHuile =
+                operation === 'ajout'
+                    ? proprietaire.quantiteHuile + quantite
+                    : Math.max(0, proprietaire.quantiteHuile - quantite);
+        }
+        else if (type === 'olive') {
+            proprietaire.quantiteOlive =
+                operation === 'ajout'
+                    ? proprietaire.quantiteOlive + quantite
+                    : Math.max(0, proprietaire.quantiteOlive - quantite);
+        }
+        if (!Array.isArray(proprietaire.transactions)) {
+            proprietaire.transactions = [];
+        }
+        proprietaire.transactions.push({
+            date: new Date(),
+            type,
+            quantite,
+            operation,
+        });
+        await proprietaire.save();
+        return proprietaire;
+    }
 };
 exports.ProprietairesService = ProprietairesService;
 exports.ProprietairesService = ProprietairesService = __decorate([

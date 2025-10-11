@@ -36,6 +36,18 @@ let ProprietairesController = class ProprietairesController {
     async remove(id) {
         return this.proprietairesService.remove(id);
     }
+    async updateStock(id, body) {
+        try {
+            const { type, quantite, operation } = body;
+            if (!type || !quantite || !operation) {
+                throw new common_1.HttpException('Les champs "type", "quantite" et "operation" sont obligatoires.', common_1.HttpStatus.BAD_REQUEST);
+            }
+            return await this.proprietairesService.updateStock(id, type, quantite, operation);
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.message, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
 };
 exports.ProprietairesController = ProprietairesController;
 __decorate([
@@ -73,6 +85,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProprietairesController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Patch)(':id/stock'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], ProprietairesController.prototype, "updateStock", null);
 exports.ProprietairesController = ProprietairesController = __decorate([
     (0, common_1.Controller)('proprietaires'),
     __metadata("design:paramtypes", [prop_service_1.ProprietairesService])

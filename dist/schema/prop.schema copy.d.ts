@@ -35,9 +35,9 @@ export declare class Proprietaire {
     stockRestant: number;
     transactions: {
         date: Date;
-        type: 'huile' | 'olive';
-        quantite: number;
-        operation: 'ajout' | 'retrait';
+        montant: number;
+        type: "ajout" | "retrait";
+        commentaire?: string;
     }[];
 }
 export declare const ProprietaireSchema: import("mongoose").Schema<Proprietaire, import("mongoose").Model<Proprietaire, any, any, any, Document<unknown, any, Proprietaire> & Proprietaire & {

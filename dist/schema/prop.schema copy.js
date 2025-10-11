@@ -51,9 +51,9 @@ __decorate([
         type: [
             {
                 date: { type: Date, default: Date.now },
-                type: { type: String, enum: ['huile', 'olive'], required: true },
-                quantite: { type: Number, required: true },
-                operation: { type: String, enum: ['ajout', 'retrait'], required: true },
+                montant: { type: Number, required: true },
+                type: { type: String, enum: ["ajout", "retrait"], required: true },
+                commentaire: { type: String },
             },
         ],
         default: [],
@@ -64,4 +64,4 @@ exports.Proprietaire = Proprietaire = __decorate([
     (0, mongoose_1.Schema)()
 ], Proprietaire);
 exports.ProprietaireSchema = mongoose_1.SchemaFactory.createForClass(Proprietaire);
-//# sourceMappingURL=prop.schema.js.map
+//# sourceMappingURL=prop.schema%20copy.js.map

@@ -37,4 +37,5 @@ export declare class ProprietairesService {
     remove(id: string): Promise<{
         message: string;
     }>;
+    updateStock(id: string, type: 'huile' | 'olive', quantite: number, operation: 'ajout' | 'retrait'): Promise<any>;
 }

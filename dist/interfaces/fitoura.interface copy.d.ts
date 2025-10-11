@@ -23,26 +23,17 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from "mongoose";
-export declare class Proprietaire {
-    nomPrenom: string;
-    dateCreation: Date;
-    nombreCaisses: number;
-    quantiteOlive: number;
-    quantiteHuile: number;
-    kattou3: number;
-    nisba: number;
-    stockRestant: number;
-    transactions: {
-        date: Date;
-        type: 'huile' | 'olive';
-        quantite: number;
-        operation: 'ajout' | 'retrait';
-    }[];
+import { Document } from 'mongoose';
+export interface FitouraInterface extends Document {
+    matriculeCamion: string;
+    chauffeur: string;
+    poidsEntree: number;
+    poidsSortie?: number;
+    poidsNet?: number;
+    prixUnitaire: number;
+    montantTotal?: number;
+    status?: 'EN_COURS' | 'TERMINE';
+    createdAt?: Date;
+    updatedAt?: Date;
+    dateSortie?: Date;
 }
-export declare const ProprietaireSchema: import("mongoose").Schema<Proprietaire, import("mongoose").Model<Proprietaire, any, any, any, Document<unknown, any, Proprietaire> & Proprietaire & {
-    _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Proprietaire, Document<unknown, {}, import("mongoose").FlatRecord<Proprietaire>> & import("mongoose").FlatRecord<Proprietaire> & {
-    _id: import("mongoose").Types.ObjectId;
-}>;
-export type ProprietaireDocument = Proprietaire & Document;

@@ -18,6 +18,7 @@ const clients_module_1 = require("./client/clients.module");
 const prop_module_1 = require("./proprietaire/prop.module");
 const fitoura_module_1 = require("./fitoura/fitoura.module");
 const employe_module_1 = require("./employe/employe.module");
+const prop_module_2 = require("./transactions/prop.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,7 +26,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forRoot("mongodb+srv://ihebbaccouch1999_db_user:zBw4eO4ppBq5XYeq@cluster0.fo8llat.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"),
-            auth_module_1.AuthModule, users_module_1.UsersModule, courses_module_1.CoursesModule, category_module_1.CategoryModule, role_module_1.RoleModule, clients_module_1.ClientsModule, prop_module_1.ProprietairesModule, fitoura_module_1.FitouraModule, employe_module_1.EmployeModule,
+            auth_module_1.AuthModule, users_module_1.UsersModule, courses_module_1.CoursesModule, category_module_1.CategoryModule, role_module_1.RoleModule, clients_module_1.ClientsModule, prop_module_1.ProprietairesModule, fitoura_module_1.FitouraModule, employe_module_1.EmployeModule, prop_module_2.TransactionsModule,
         ]
     })
 ], AppModule);

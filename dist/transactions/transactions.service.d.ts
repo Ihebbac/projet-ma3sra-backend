@@ -23,26 +23,18 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from "mongoose";
-export declare class Proprietaire {
-    nomPrenom: string;
-    dateCreation: Date;
-    nombreCaisses: number;
-    quantiteOlive: number;
-    quantiteHuile: number;
-    kattou3: number;
-    nisba: number;
-    stockRestant: number;
-    transactions: {
-        date: Date;
-        type: 'huile' | 'olive';
-        quantite: number;
-        operation: 'ajout' | 'retrait';
-    }[];
+import { CreateTransactionDto } from './dto/create-transactions.dto';
+import { UpdateTransactionDto } from './dto/update-prop.dto';
+import { Model } from 'mongoose';
+import { ITransaction } from 'src/interfaces/transaction.interface';
+export declare class TransactionsService {
+    private transactionModel;
+    constructor(transactionModel: Model<ITransaction>);
+    create(createTransactionDto: CreateTransactionDto): Promise<any>;
+    findAll(): Promise<any[]>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateTransactionDto: UpdateTransactionDto): Promise<any>;
+    remove(id: string): Promise<{
+        message: string;
+    }>;
 }
-export declare const ProprietaireSchema: import("mongoose").Schema<Proprietaire, import("mongoose").Model<Proprietaire, any, any, any, Document<unknown, any, Proprietaire> & Proprietaire & {
-    _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Proprietaire, Document<unknown, {}, import("mongoose").FlatRecord<Proprietaire>> & import("mongoose").FlatRecord<Proprietaire> & {
-    _id: import("mongoose").Types.ObjectId;
-}>;
-export type ProprietaireDocument = Proprietaire & Document;

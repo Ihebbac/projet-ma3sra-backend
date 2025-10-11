@@ -59,4 +59,45 @@ export class ProprietairesService {
     }
     return { message: `Proprietaire with ID ${id} deleted successfully.` };
   }
+
+  // 🆕 ✅ Nouvelle méthode : mise à jour du stock (huile/olive) avec historique
+  async updateStock(
+    id: string,
+    type: 'huile' | 'olive',
+    quantite: number,
+    operation: 'ajout' | 'retrait',
+  ): Promise<any> {
+    const proprietaire = await this.proprietaireModel.findById(id).exec();
+    if (!proprietaire) {
+      throw new NotFoundException(`Proprietaire with ID ${id} not found for stock update.`);
+    }
+
+    // ✅ Mise à jour du stock selon le type et l’opération
+    if (type === 'huile') {
+      proprietaire.quantiteHuile =
+        operation === 'ajout'
+          ? proprietaire.quantiteHuile + quantite
+          : Math.max(0, proprietaire.quantiteHuile - quantite);
+    } else if (type === 'olive') {
+      proprietaire.quantiteOlive =
+        operation === 'ajout'
+          ? proprietaire.quantiteOlive + quantite
+          : Math.max(0, proprietaire.quantiteOlive - quantite);
+    }
+
+    // ✅ Ajout d’un petit historique dans un champ transactions (auto-créé s’il n’existe pas)
+    if (!Array.isArray((proprietaire as any).transactions)) {
+      (proprietaire as any).transactions = [];
+    }
+
+    (proprietaire as any).transactions.push({
+      date: new Date(),
+      type,
+      quantite,
+      operation,
+    });
+
+    await proprietaire.save();
+    return proprietaire;
+  }
 }

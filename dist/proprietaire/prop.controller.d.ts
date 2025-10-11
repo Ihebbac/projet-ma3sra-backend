@@ -11,4 +11,9 @@ export declare class ProprietairesController {
     remove(id: string): Promise<{
         message: string;
     }>;
+    updateStock(id: string, body: {
+        type: 'huile' | 'olive';
+        quantite: number;
+        operation: 'ajout' | 'retrait';
+    }): Promise<any>;
 }

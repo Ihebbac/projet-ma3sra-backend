@@ -23,26 +23,16 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from "mongoose";
-export declare class Proprietaire {
-    nomPrenom: string;
-    dateCreation: Date;
-    nombreCaisses: number;
-    quantiteOlive: number;
-    quantiteHuile: number;
-    kattou3: number;
-    nisba: number;
-    stockRestant: number;
-    transactions: {
-        date: Date;
-        type: 'huile' | 'olive';
-        quantite: number;
-        operation: 'ajout' | 'retrait';
-    }[];
+import { Document } from 'mongoose';
+export interface ITransaction extends Document {
+    date: Date;
+    typeStock: 'olive' | 'huile';
+    quantite: number;
+    clientNom: string;
+    motif: string;
+    details: string;
+    proprietaireId: string;
+    clientId: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
-export declare const ProprietaireSchema: import("mongoose").Schema<Proprietaire, import("mongoose").Model<Proprietaire, any, any, any, Document<unknown, any, Proprietaire> & Proprietaire & {
-    _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Proprietaire, Document<unknown, {}, import("mongoose").FlatRecord<Proprietaire>> & import("mongoose").FlatRecord<Proprietaire> & {
-    _id: import("mongoose").Types.ObjectId;
-}>;
-export type ProprietaireDocument = Proprietaire & Document;
