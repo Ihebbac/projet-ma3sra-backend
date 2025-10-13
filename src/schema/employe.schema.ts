@@ -14,7 +14,9 @@ export class Employe extends Document {
 
   @Prop({ required: true })
   poste: string;
-
+ 
+  @Prop({ type: [String], default: [] })
+  joursPayes: string[];
   @Prop({ required: true })
   montantJournalier: number;
 

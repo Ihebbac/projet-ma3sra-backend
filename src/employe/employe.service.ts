@@ -49,7 +49,20 @@ export class EmployeService {
     const result = await this.employeModel.findByIdAndDelete(id).exec();
     if (!result) throw new NotFoundException('Employé non trouvé');
   }
+  async marquerJourCommePaye(id: string, date: string) {
+    const employe = await this.employeModel.findById(id);
+    if (!employe) throw new NotFoundException('Employé non trouvé');
 
+    if (!employe.joursPayes) employe.joursPayes = [];
+
+    // Si déjà payé, on ne fait rien
+    if (!employe.joursPayes.includes(date)) {
+      employe.joursPayes.push(date);
+      await employe.save();
+    }
+
+    return { success: true, employe };
+  }
   // ✅ Marquer la présence d’un employé pour aujourd’hui
   async markPresence(id: string): Promise<Employe> {
     const employe = await this.findOne(id);

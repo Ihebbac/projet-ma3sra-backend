@@ -29,6 +29,7 @@ export declare class Employe extends Document {
     prenom: string;
     numTel: string;
     poste: string;
+    joursPayes: string[];
     montantJournalier: number;
     joursTravailles: Date[];
 }

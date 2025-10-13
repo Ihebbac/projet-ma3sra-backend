@@ -35,6 +35,12 @@ export declare class EmployeService {
     findOne(id: string): Promise<Employe>;
     update(id: string, updateEmployeDto: UpdateEmployeDto): Promise<Employe>;
     remove(id: string): Promise<void>;
+    marquerJourCommePaye(id: string, date: string): Promise<{
+        success: boolean;
+        employe: import("mongoose").Document<unknown, {}, Employe> & Employe & Required<{
+            _id: unknown;
+        }>;
+    }>;
     markPresence(id: string): Promise<Employe>;
     calculSalaire(id: string, startDate?: Date, endDate?: Date): Promise<number>;
 }

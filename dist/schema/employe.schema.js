@@ -32,6 +32,10 @@ __decorate([
     __metadata("design:type", String)
 ], Employe.prototype, "poste", void 0);
 __decorate([
+    (0, mongoose_1.Prop)({ type: [String], default: [] }),
+    __metadata("design:type", Array)
+], Employe.prototype, "joursPayes", void 0);
+__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Employe.prototype, "montantJournalier", void 0);

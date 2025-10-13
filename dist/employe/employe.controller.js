@@ -33,6 +33,9 @@ let EmployeController = class EmployeController {
     updatePut(id, updateEmployeDto) {
         return this.employeService.update(id, updateEmployeDto);
     }
+    async marquerCommePaye(id, date) {
+        return this.employeService.marquerJourCommePaye(id, date);
+    }
     updatePatch(id, updateEmployeDto) {
         return this.employeService.update(id, updateEmployeDto);
     }
@@ -77,6 +80,14 @@ __decorate([
     __metadata("design:paramtypes", [String, update_employe_dto_1.UpdateEmployeDto]),
     __metadata("design:returntype", void 0)
 ], EmployeController.prototype, "updatePut", null);
+__decorate([
+    (0, common_1.Put)(':id/payer'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], EmployeController.prototype, "marquerCommePaye", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

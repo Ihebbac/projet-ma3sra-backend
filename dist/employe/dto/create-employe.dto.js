@@ -35,6 +35,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEmployeDto.prototype, "poste", void 0);
 __decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateEmployeDto.prototype, "statut", void 0);
+__decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateEmployeDto.prototype, "montantJournalier", void 0);

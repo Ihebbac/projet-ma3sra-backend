@@ -27,7 +27,13 @@ export class EmployeController {
   updatePut(@Param('id') id: string, @Body() updateEmployeDto: UpdateEmployeDto) {
     return this.employeService.update(id, updateEmployeDto);
   }
-
+  @Put(':id/payer')
+  async marquerCommePaye(
+    @Param('id') id: string,
+    @Body('date') date: string,
+  ) {
+    return this.employeService.marquerJourCommePaye(id, date);
+  }
   @Patch(':id')
   updatePatch(@Param('id') id: string, @Body() updateEmployeDto: UpdateEmployeDto) {
     return this.employeService.update(id, updateEmployeDto);

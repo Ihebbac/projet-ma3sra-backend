@@ -16,6 +16,8 @@ export class CreateEmployeDto {
   @IsString()
   @IsNotEmpty()
   poste: string;
+  @IsString()
+  statut: string;
 
   @IsNumber()
   montantJournalier: number;

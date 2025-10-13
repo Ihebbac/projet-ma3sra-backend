@@ -49,6 +49,18 @@ let EmployeService = class EmployeService {
         if (!result)
             throw new common_1.NotFoundException('Employé non trouvé');
     }
+    async marquerJourCommePaye(id, date) {
+        const employe = await this.employeModel.findById(id);
+        if (!employe)
+            throw new common_1.NotFoundException('Employé non trouvé');
+        if (!employe.joursPayes)
+            employe.joursPayes = [];
+        if (!employe.joursPayes.includes(date)) {
+            employe.joursPayes.push(date);
+            await employe.save();
+        }
+        return { success: true, employe };
+    }
     async markPresence(id) {
         const employe = await this.findOne(id);
         const today = new Date();
