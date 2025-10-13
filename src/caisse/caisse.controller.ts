@@ -12,7 +12,7 @@ import { CreateCaisseDto } from './dto/create-caisse.dto';
 import { CaisseService } from './caisse.service';
 import { UpdateCaissetDto } from './dto/update-Caisse.dto';
 
-@Controller('Caisse')
+@Controller('caisse')
 export class CaisseController {
   constructor(private readonly CaisseService: CaisseService) {}
 
