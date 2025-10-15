@@ -17,4 +17,5 @@ export declare class CreateClientDto {
     huileParQfza?: number;
     prixFinal?: number;
     prixKg?: number;
+    status: 'payé' | 'non payé';
 }
