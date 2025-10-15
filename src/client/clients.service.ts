@@ -51,7 +51,17 @@ export class ClientsService {
     }
     return updatedClient;
   }
-
+  async updateStatus(id: string, status: 'payé' | 'non payé'): Promise<any> {
+    const updatedClient = await this.clientModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true },
+    );
+    if (!updatedClient) {
+      throw new NotFoundException(`Client with ID ${id} not found for status update.`);
+    }
+    return updatedClient;
+  }
   async remove(id: string): Promise<{ message: string }> {
     const deletedClient = await this.clientModel.findByIdAndDelete(id).exec();
     if (!deletedClient) {

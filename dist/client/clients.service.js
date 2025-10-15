@@ -51,6 +51,13 @@ let ClientsService = class ClientsService {
         }
         return updatedClient;
     }
+    async updateStatus(id, status) {
+        const updatedClient = await this.clientModel.findByIdAndUpdate(id, { status }, { new: true });
+        if (!updatedClient) {
+            throw new common_1.NotFoundException(`Client with ID ${id} not found for status update.`);
+        }
+        return updatedClient;
+    }
     async remove(id) {
         const deletedClient = await this.clientModel.findByIdAndDelete(id).exec();
         if (!deletedClient) {

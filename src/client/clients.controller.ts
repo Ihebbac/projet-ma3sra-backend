@@ -25,6 +25,13 @@ export class ClientsController {
   async findAll() {
     return this.clientsService.findAll();
   }
+  @Patch(':id/status')
+  async updateStatus(
+    @Param('id') id: string,
+    @Body() body: { status: 'payé' | 'non payé' },
+  ) {
+    return this.clientsService.updateStatus(id, body.status);
+  }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {

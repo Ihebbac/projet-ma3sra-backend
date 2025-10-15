@@ -34,6 +34,7 @@ export declare class ClientsService {
     findAll(): Promise<any[]>;
     findOne(id: string): Promise<any>;
     update(id: string, updateClientDto: UpdateClientDto): Promise<any>;
+    updateStatus(id: string, status: 'payé' | 'non payé'): Promise<any>;
     remove(id: string): Promise<{
         message: string;
     }>;
