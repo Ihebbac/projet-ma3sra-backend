@@ -1,3 +1,4 @@
+// client.schema.ts
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
@@ -6,8 +7,8 @@ export class Client {
   @Prop({ required: true })
   nomPrenom: string;
 
-  @Prop({ required: true, unique: true })
-  numCIN: number;
+  // @Prop({ required: true, sparse: true })
+  // numCIN: number;
 
   @Prop({ required: true })
   numTelephone: number;
@@ -23,8 +24,10 @@ export class Client {
 
   @Prop()
   quantiteOlive: number; 
-
   
+  @Prop()
+  quantiteOliveNet: number; 
+
   @Prop()
   quantiteHuile: number; 
 
@@ -33,6 +36,29 @@ export class Client {
 
   @Prop()
   nisba: number; 
+
+  
+  @Prop()
+  nisbaReelle?: number;
+
+  @Prop()
+  quantiteHuileTheorique?: number;
+
+  @Prop()
+  differenceHuile?: number; 
+
+  @Prop()
+  nombreWiba?: number; 
+
+  @Prop()
+  nombreQfza?: number; 
+
+  @Prop()
+  huileParQfza?: number;
+  @Prop()
+  prixFinal?: number;
+  @Prop()
+  prixKg?: number;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);

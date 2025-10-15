@@ -19,10 +19,6 @@ __decorate([
     __metadata("design:type", String)
 ], Client.prototype, "nomPrenom", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true, unique: true }),
-    __metadata("design:type", Number)
-], Client.prototype, "numCIN", void 0);
-__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Client.prototype, "numTelephone", void 0);
@@ -45,6 +41,10 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
+], Client.prototype, "quantiteOliveNet", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
 ], Client.prototype, "quantiteHuile", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
@@ -54,6 +54,38 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
 ], Client.prototype, "nisba", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "nisbaReelle", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "quantiteHuileTheorique", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "differenceHuile", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "nombreWiba", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "nombreQfza", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "huileParQfza", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "prixFinal", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Client.prototype, "prixKg", void 0);
 exports.Client = Client = __decorate([
     (0, mongoose_1.Schema)()
 ], Client);

@@ -26,15 +26,23 @@
 import { Document } from "mongoose";
 export declare class Client {
     nomPrenom: string;
-    numCIN: number;
     numTelephone: number;
     type: string;
     dateCreation: Date;
     nombreCaisses: number;
     quantiteOlive: number;
+    quantiteOliveNet: number;
     quantiteHuile: number;
     kattou3: number;
     nisba: number;
+    nisbaReelle?: number;
+    quantiteHuileTheorique?: number;
+    differenceHuile?: number;
+    nombreWiba?: number;
+    nombreQfza?: number;
+    huileParQfza?: number;
+    prixFinal?: number;
+    prixKg?: number;
 }
 export declare const ClientSchema: import("mongoose").Schema<Client, import("mongoose").Model<Client, any, any, any, Document<unknown, any, Client> & Client & {
     _id: import("mongoose").Types.ObjectId;
