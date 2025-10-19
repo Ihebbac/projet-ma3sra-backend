@@ -4,7 +4,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{ cors: true });
+  const app = await NestFactory.create(AppModule,{ cors: {
+    origin: '*', // autorise toutes les origines
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  }, });
   app.useGlobalFilters(new AllExceptionsFilter());
   const config = new DocumentBuilder()
   .setTitle('ma3sra')
