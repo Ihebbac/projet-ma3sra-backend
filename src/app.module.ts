@@ -11,6 +11,7 @@ import { FitouraModule } from './fitoura/fitoura.module';
 import { EmployeModule } from './employe/employe.module';
 import { TransactionsModule } from './transactions/prop.module';
 import { CaissesModule } from './caisse/caisse.module';
+// import { PrinterModule } from './printticket/printer.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
@@ -27,6 +28,7 @@ import { CaissesModule } from './caisse/caisse.module';
     EmployeModule,
     TransactionsModule,
     CaissesModule,
+    
   ],
 })
 export class AppModule {}
