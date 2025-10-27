@@ -14,14 +14,15 @@ export class Employe extends Document {
 
   @Prop({ required: true })
   poste: string;
- 
-  @Prop({ type: [String], default: [] })
-  joursPayes: string[];
+
+  @Prop({ type: Array, default: [] })
+  joursPayes: any;
   @Prop({ required: true })
   montantJournalier: number;
-
-  @Prop({ type: [Date], default: [] })
-  joursTravailles: Date[];
+  @Prop({ required: false })
+  montantHeure: number;
+  @Prop({ type: Array })
+  joursTravailles: any;
 }
 
 export const EmployeSchema = SchemaFactory.createForClass(Employe);

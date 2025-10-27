@@ -5,4 +5,5 @@ export declare class CreateEmployeDto {
     poste: string;
     statut: string;
     montantJournalier: number;
+    montantHeure: number;
 }

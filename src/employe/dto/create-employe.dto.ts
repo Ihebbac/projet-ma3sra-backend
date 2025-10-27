@@ -21,4 +21,7 @@ export class CreateEmployeDto {
 
   @IsNumber()
   montantJournalier: number;
+
+  @IsNumber()
+  montantHeure: number;
 }

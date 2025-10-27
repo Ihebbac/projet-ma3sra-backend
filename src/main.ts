@@ -4,19 +4,21 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{ cors: {
-    origin: '*', // autorise toutes les origines
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    credentials: true,
-  }, });
+  const app = await NestFactory.create(AppModule, {
+    cors: {
+      origin: '*', // autorise toutes les origines
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+    },
+  });
   app.useGlobalFilters(new AllExceptionsFilter());
   const config = new DocumentBuilder()
-  .setTitle('ma3sra')
-  .setDescription('ma3sra API COllection')
-  .setVersion('1.0')
-  .build();
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+    .setTitle('ma3sra')
+    .setDescription('ma3sra API COllection')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   await app.listen(8170);
 }
 bootstrap();

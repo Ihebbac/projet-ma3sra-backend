@@ -35,14 +35,19 @@ let EmployeService = class EmployeService {
         return employe;
     }
     async update(id, updateEmployeDto) {
-        const employe = await this.employeModel.findByIdAndUpdate(id, {
-            ...updateEmployeDto,
-            updatedAt: new Date()
-        }, { new: true, runValidators: true });
-        if (!employe) {
-            throw new common_1.NotFoundException(`Employé avec l'ID ${id} non trouvé`);
+        try {
+            const employe = await this.employeModel.findByIdAndUpdate(id, {
+                ...updateEmployeDto,
+                updatedAt: new Date(),
+            }, { new: true, runValidators: true });
+            if (!employe) {
+                throw new common_1.NotFoundException(`Employé avec l'ID ${id} non trouvé`);
+            }
+            return employe;
         }
-        return employe;
+        catch (err) {
+            return err;
+        }
     }
     async remove(id) {
         const result = await this.employeModel.findByIdAndDelete(id).exec();
@@ -55,8 +60,14 @@ let EmployeService = class EmployeService {
             throw new common_1.NotFoundException('Employé non trouvé');
         if (!employe.joursPayes)
             employe.joursPayes = [];
-        if (!employe.joursPayes.includes(date)) {
-            employe.joursPayes.push(date);
+        const jourTravaille = employe.joursTravailles.find((jour) => jour.date === date);
+        if (!jourTravaille)
+            throw new common_1.NotFoundException('Jour travaillé non trouvé');
+        if (!employe.joursPayes.some((entry) => entry.date === date)) {
+            employe.joursPayes.push({
+                date,
+                heuresSup: jourTravaille.heuresSup || 0,
+            });
             await employe.save();
         }
         return { success: true, employe };

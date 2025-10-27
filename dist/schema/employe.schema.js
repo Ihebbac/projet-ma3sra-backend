@@ -32,16 +32,20 @@ __decorate([
     __metadata("design:type", String)
 ], Employe.prototype, "poste", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [String], default: [] }),
-    __metadata("design:type", Array)
+    (0, mongoose_1.Prop)({ type: Array, default: [] }),
+    __metadata("design:type", Object)
 ], Employe.prototype, "joursPayes", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Employe.prototype, "montantJournalier", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [Date], default: [] }),
-    __metadata("design:type", Array)
+    (0, mongoose_1.Prop)({ required: false }),
+    __metadata("design:type", Number)
+], Employe.prototype, "montantHeure", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Array }),
+    __metadata("design:type", Object)
 ], Employe.prototype, "joursTravailles", void 0);
 exports.Employe = Employe = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })

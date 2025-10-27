@@ -29,9 +29,10 @@ export declare class Employe extends Document {
     prenom: string;
     numTel: string;
     poste: string;
-    joursPayes: string[];
+    joursPayes: any;
     montantJournalier: number;
-    joursTravailles: Date[];
+    montantHeure: number;
+    joursTravailles: any;
 }
 export declare const EmployeSchema: import("mongoose").Schema<Employe, import("mongoose").Model<Employe, any, any, any, Document<unknown, any, Employe> & Employe & Required<{
     _id: unknown;

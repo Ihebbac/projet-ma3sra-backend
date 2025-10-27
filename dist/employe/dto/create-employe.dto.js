@@ -42,4 +42,8 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateEmployeDto.prototype, "montantJournalier", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateEmployeDto.prototype, "montantHeure", void 0);
 //# sourceMappingURL=create-employe.dto.js.map

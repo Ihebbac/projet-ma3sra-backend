@@ -33,14 +33,14 @@ export declare class EmployeController {
     create(createEmployeDto: CreateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
     findAll(): Promise<import("../schema/employe.schema").Employe[]>;
     findOne(id: string): Promise<import("../schema/employe.schema").Employe>;
-    updatePut(id: string, updateEmployeDto: UpdateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
+    updatePut(id: string, updateEmployeDto: any): Promise<any>;
     marquerCommePaye(id: string, date: string): Promise<{
         success: boolean;
         employe: import("mongoose").Document<unknown, {}, import("../schema/employe.schema").Employe> & import("../schema/employe.schema").Employe & Required<{
             _id: unknown;
         }>;
     }>;
-    updatePatch(id: string, updateEmployeDto: UpdateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
+    updatePatch(id: string, updateEmployeDto: UpdateEmployeDto): Promise<any>;
     remove(id: string): Promise<void>;
     markPresence(id: string): Promise<import("../schema/employe.schema").Employe>;
     calculSalaire(id: string, start?: string, end?: string): Promise<number>;

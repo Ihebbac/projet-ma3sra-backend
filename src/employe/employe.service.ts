@@ -27,42 +27,59 @@ export class EmployeService {
     return employe;
   }
 
-  async update(id: string, updateEmployeDto: UpdateEmployeDto): Promise<Employe> {
-    const employe = await this.employeModel.findByIdAndUpdate(
-      id,
-      { 
-        ...updateEmployeDto,
-        updatedAt: new Date()
-      },
-      { new: true, runValidators: true }
-    );
+  async update(id: string, updateEmployeDto: any): Promise<any> {
+    try {
+      const employe = await this.employeModel.findByIdAndUpdate(
+        id,
+        {
+          ...updateEmployeDto,
+          updatedAt: new Date(),
+        },
+        { new: true, runValidators: true },
+      );
 
-    if (!employe) {
-      throw new NotFoundException(`Employé avec l'ID ${id} non trouvé`);
+      if (!employe) {
+        throw new NotFoundException(`Employé avec l'ID ${id} non trouvé`);
+      }
+
+      return employe;
+    } catch (err) {
+      return err;
     }
-
-    return employe;
   }
-
 
   async remove(id: string): Promise<void> {
     const result = await this.employeModel.findByIdAndDelete(id).exec();
     if (!result) throw new NotFoundException('Employé non trouvé');
   }
+
   async marquerJourCommePaye(id: string, date: string) {
     const employe = await this.employeModel.findById(id);
     if (!employe) throw new NotFoundException('Employé non trouvé');
 
     if (!employe.joursPayes) employe.joursPayes = [];
 
-    // Si déjà payé, on ne fait rien
-    if (!employe.joursPayes.includes(date)) {
-      employe.joursPayes.push(date);
+    // Find the corresponding jourTravailles entry to get the heuresSup
+    const jourTravaille = employe.joursTravailles.find(
+      (jour: { date: string }) => jour.date === date,
+    );
+
+    if (!jourTravaille)
+      throw new NotFoundException('Jour travaillé non trouvé');
+
+    // If already paid, do nothing
+    if (!employe.joursPayes.some((entry: any) => entry.date === date)) {
+      // Add the date and heuresSup to the joursPayes
+      employe.joursPayes.push({
+        date,
+        heuresSup: jourTravaille.heuresSup || 0, // Default to 0 if no overtime
+      });
       await employe.save();
     }
 
     return { success: true, employe };
   }
+
   // ✅ Marquer la présence d’un employé pour aujourd’hui
   async markPresence(id: string): Promise<Employe> {
     const employe = await this.findOne(id);
@@ -80,7 +97,11 @@ export class EmployeService {
   }
 
   // ✅ Calcul salaire total pour une période donnée
-  async calculSalaire(id: string, startDate?: Date, endDate?: Date): Promise<number> {
+  async calculSalaire(
+    id: string,
+    startDate?: Date,
+    endDate?: Date,
+  ): Promise<number> {
     const employe = await this.findOne(id);
 
     let joursTravailles = employe.joursTravailles;

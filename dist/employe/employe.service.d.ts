@@ -26,14 +26,13 @@
 import { Model } from 'mongoose';
 import { Employe } from '../schema/employe.schema';
 import { CreateEmployeDto } from './dto/create-employe.dto';
-import { UpdateEmployeDto } from './dto/update-employe.dto';
 export declare class EmployeService {
     private employeModel;
     constructor(employeModel: Model<Employe>);
     create(createEmployeDto: CreateEmployeDto): Promise<Employe>;
     findAll(): Promise<Employe[]>;
     findOne(id: string): Promise<Employe>;
-    update(id: string, updateEmployeDto: UpdateEmployeDto): Promise<Employe>;
+    update(id: string, updateEmployeDto: any): Promise<any>;
     remove(id: string): Promise<void>;
     marquerJourCommePaye(id: string, date: string): Promise<{
         success: boolean;
