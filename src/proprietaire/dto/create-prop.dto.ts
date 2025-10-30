@@ -24,4 +24,19 @@ export class CreateProprietaireDto {
   @IsOptional()
   @IsNumber()
   nisba?: number;
+
+  type: 'proprietaire';
+  dateCreation?: Date;
+  
+  quantiteOliveNet?: number;
+ 
+
+  nisbaReelle?: number;
+  quantiteHuileTheorique?: number;
+  differenceHuile?: number;
+  nombreWiba?: number;
+  nombreQfza?: number;
+  huileParQfza?: number;
+
+
 }

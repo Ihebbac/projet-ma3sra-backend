@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 @Schema()
 export class Proprietaire {
@@ -20,6 +20,23 @@ export class Proprietaire {
 
   @Prop({ default: 0 })
   kattou3: number;
+  type: 'proprietaire';
+
+  @Prop({ default: 0 })
+  quantiteOliveNet?: number;
+
+  @Prop({ default: 0 })
+  nisbaReelle?: number;
+  @Prop({ default: 0 })
+  quantiteHuileTheorique?: number;
+  @Prop({ default: 0 })
+  differenceHuile?: number;
+  @Prop({ default: 0 })
+  nombreWiba?: number;
+  @Prop({ default: 0 })
+  nombreQfza?: number;
+  @Prop({ default: 0 })
+  huileParQfza?: number;
 
   @Prop({ default: 0 })
   nisba: number;

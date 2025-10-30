@@ -23,7 +23,7 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 export declare class Proprietaire {
     nomPrenom: string;
     dateCreation: Date;
@@ -31,6 +31,14 @@ export declare class Proprietaire {
     quantiteOlive: number;
     quantiteHuile: number;
     kattou3: number;
+    type: 'proprietaire';
+    quantiteOliveNet?: number;
+    nisbaReelle?: number;
+    quantiteHuileTheorique?: number;
+    differenceHuile?: number;
+    nombreWiba?: number;
+    nombreQfza?: number;
+    huileParQfza?: number;
     nisba: number;
     stockRestant: number;
     transactions: {

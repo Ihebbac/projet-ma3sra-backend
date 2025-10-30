@@ -41,6 +41,34 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)({ default: 0 }),
     __metadata("design:type", Number)
+], Proprietaire.prototype, "quantiteOliveNet", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Proprietaire.prototype, "nisbaReelle", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Proprietaire.prototype, "quantiteHuileTheorique", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Proprietaire.prototype, "differenceHuile", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Proprietaire.prototype, "nombreWiba", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Proprietaire.prototype, "nombreQfza", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Proprietaire.prototype, "huileParQfza", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
 ], Proprietaire.prototype, "nisba", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ default: 0 }),
