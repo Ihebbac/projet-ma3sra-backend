@@ -3,5 +3,6 @@ export class CreateCaisseDto {
   montant: number;
   type: string;
   date: string;
+  uniqueId: string;
   commentaire: string;
 }

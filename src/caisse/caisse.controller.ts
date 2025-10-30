@@ -43,4 +43,8 @@ export class CaisseController {
   async remove(@Param('id') id: string) {
     return this.CaisseService.remove(id);
   }
+  @Delete('removeByUniqueId/:id')
+  async removeByUniqueId(@Param('id') id: string) {
+    return this.CaisseService.removeByUniqueId(id);
+  }
 }

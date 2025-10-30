@@ -17,6 +17,10 @@ export class CaisseService {
 
   async create(createCaisseDto: CreateCaisseDto): Promise<any> {
     try {
+      await this.caisseModel.findOneAndDelete({
+        uniqueId: createCaisseDto.uniqueId,
+      });
+
       const newCaisse = new this.caisseModel(createCaisseDto);
       return await newCaisse.save();
     } catch (error) {
@@ -63,5 +67,16 @@ export class CaisseService {
       );
     }
     return { message: `Caisse with ID ${id} deleted successfully.` };
+  }
+  async removeByUniqueId(uniqueId: string): Promise<{ message: string }> {
+    const deletedCaisse = await this.caisseModel
+      .findOneAndDelete({ uniqueId: uniqueId })
+      .exec();
+    if (!deletedCaisse) {
+      throw new NotFoundException(
+        `Caisse with ID ${uniqueId} not found for deletion.`,
+      );
+    }
+    return { message: `Caisse with ID ${uniqueId} deleted successfully.` };
   }
 }
