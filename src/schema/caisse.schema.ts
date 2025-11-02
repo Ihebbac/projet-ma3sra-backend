@@ -11,7 +11,7 @@ export class Caisse {
 
   @Prop({ required: true })
   type: string;
-  @Prop({ required: true })
+  @Prop({ required: false })
   uniqueId: string;
 
   @Prop({ required: true })
