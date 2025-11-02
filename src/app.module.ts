@@ -1,16 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './apis/users/users.module';
-import { CoursesModule } from './apis/courses/courses.module';
-import { AuthModule } from './apis/auth/auth.module';
-import { CategoryModule } from './apis/category/category.module';
-import { RoleModule } from './apis/role/role.module';
 import { ClientsModule } from './client/clients.module';
 import { ProprietairesModule } from './proprietaire/prop.module';
 import { FitouraModule } from './fitoura/fitoura.module';
 import { EmployeModule } from './employe/employe.module';
 import { TransactionsModule } from './transactions/prop.module';
 import { CaissesModule } from './caisse/caisse.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 // import { PrinterModule } from './printticket/printer.module';
 @Module({
   imports: [
@@ -19,16 +16,12 @@ import { CaissesModule } from './caisse/caisse.module';
     ),
     AuthModule,
     UsersModule,
-    CoursesModule,
-    CategoryModule,
-    RoleModule,
     ClientsModule,
     ProprietairesModule,
     FitouraModule,
     EmployeModule,
     TransactionsModule,
     CaissesModule,
-    
   ],
 })
 export class AppModule {}

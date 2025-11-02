@@ -22,12 +22,16 @@ let UsersService = class UsersService {
         this.userModel = userModel;
     }
     async create(createUserDto) {
+        console.log('dddddddddddddddddddd');
         const hash = await bcrypt.hash(createUserDto.password, 10);
         const newUser = new this.userModel({ ...createUserDto, password: hash });
         return newUser.save();
     }
     async findAll() {
-        const usersData = await this.userModel.find().select('-password').populate('role');
+        const usersData = await this.userModel
+            .find()
+            .select('-password')
+            .populate('role');
         if (!usersData || usersData.length == 0) {
             throw new common_1.NotFoundException('User data not found! collection is empty');
         }

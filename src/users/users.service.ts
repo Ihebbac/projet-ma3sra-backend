@@ -9,7 +9,6 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from 'src/schema/user.schema';
 
 @Injectable()
@@ -50,7 +49,7 @@ export class UsersService {
     return this.userModel.findOne({ email: email.toLowerCase() });
   }
 
-  async update(id: number, dto: UpdateUserDto) {
+  async update(id: number, dto: CreateUserDto) {
     // à adapter si tu utilises un id string (ObjectId)
     throw new Error('Not implemented');
   }

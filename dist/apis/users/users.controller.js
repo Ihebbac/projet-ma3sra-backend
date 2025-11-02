@@ -17,7 +17,6 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
-const request_type_1 = require("../../shared/utils/request-type");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -45,27 +44,27 @@ let UsersController = class UsersController {
 };
 exports.UsersController = UsersController;
 __decorate([
-    (0, common_1.Post)(request_type_1.RequestType.create),
+    (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(request_type_1.RequestType.getAll),
+    (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(request_type_1.RequestType.getById + ':id'),
+    (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(request_type_1.RequestType.update + ':id'),
+    (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -73,7 +72,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(request_type_1.RequestType.delete + ':id'),
+    (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
