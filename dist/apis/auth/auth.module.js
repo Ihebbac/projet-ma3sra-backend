@@ -15,8 +15,7 @@ const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("../../shared/utils/config");
 const user_schema_1 = require("../../shared/schema/user.schema");
 let AuthModule = class AuthModule {
-    configure(consumer) {
-    }
+    configure(consumer) { }
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
@@ -29,7 +28,7 @@ exports.AuthModule = AuthModule = __decorate([
             }),
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService]
+        providers: [auth_service_1.AuthService],
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

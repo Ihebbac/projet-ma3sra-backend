@@ -11,13 +11,12 @@ import { UserSchema } from 'src/shared/schema/user.schema';
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     JwtModule.register({
       secret: secretKey.secret,
-      signOptions: { expiresIn: '1h' }, 
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class AuthModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-   }
+  configure(consumer: MiddlewareConsumer) {}
 }

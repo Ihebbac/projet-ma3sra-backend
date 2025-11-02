@@ -16,39 +16,72 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const bcrypt = require("bcryptjs");
+const user_schema_1 = require("../schema/user.schema");
 let UsersService = class UsersService {
     constructor(userModel) {
         this.userModel = userModel;
+        this.sanitizeLean = (u) => ({
+            id: u._id?.toString?.() ?? u._id,
+            name: u.name,
+            email: u.email,
+            phone: u.phone,
+            roles: u.roles,
+            createdAt: u.createdAt,
+            updatedAt: u.updatedAt,
+        });
     }
-    async create(createUserDto) {
-        const newUser = new this.userModel(createUserDto);
-        return newUser.save();
+    async create(dto) {
+        const exists = await this.userModel.exists({
+            email: dto.email.toLowerCase(),
+        });
+        if (exists)
+            throw new common_1.ConflictException('Email déjà utilisé');
+        const passwordHash = await bcrypt.hash(dto.password, 12);
+        const doc = await this.userModel.create({
+            name: dto.name,
+            email: dto.email.toLowerCase(),
+            phone: dto.phone,
+            roles: dto.roles?.length ? dto.roles : ['user'],
+            passwordHash,
+        });
+        return this.sanitize(doc);
     }
     async findAll() {
-        const usersData = await this.userModel.find();
-        if (!usersData || usersData.length == 0) {
-            throw new common_1.NotFoundException('User data not found! collection is empty');
-        }
-        return usersData;
+        const users = await this.userModel.find().lean();
+        return users.map(this.sanitizeLean);
     }
     async findOne(id) {
-        const userData = await this.userModel.findById(id);
-        if (!userData) {
-            throw new Error('User not Found!');
-        }
-        return userData;
+        const user = await this.userModel.findById(id);
+        if (!user)
+            throw new common_1.NotFoundException('Utilisateur introuvable');
+        return this.sanitize(user);
     }
-    update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
+    async findByEmail(email) {
+        return this.userModel.findOne({ email: email.toLowerCase() });
     }
-    remove(id) {
-        return `This action removes a #${id} user`;
+    async update(id, dto) {
+        throw new Error('Not implemented');
+    }
+    async remove(id) {
+        throw new Error('Not implemented');
+    }
+    sanitize(u) {
+        return {
+            id: u._id.toString(),
+            name: u.name,
+            email: u.email,
+            phone: u.phone,
+            roles: u.roles,
+            createdAt: u.createdAt,
+            updatedAt: u.updatedAt,
+        };
     }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('User')),
+    __param(0, (0, mongoose_1.InjectModel)(user_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map

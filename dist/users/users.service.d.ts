@@ -23,18 +23,65 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
+import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Model } from 'mongoose';
-import { IUser } from 'src/interfaces/user.interface';
+import { User, UserDocument } from 'src/schema/user.schema';
 export declare class UsersService {
-    private userModel;
-    constructor(userModel: Model<IUser>);
-    create(createUserDto: CreateUserDto): Promise<IUser>;
-    findAll(): Promise<IUser[]>;
-    findOne(id: string): Promise<import("mongoose").Document<unknown, {}, IUser> & IUser & Required<{
-        _id: unknown;
+    private readonly userModel;
+    constructor(userModel: Model<UserDocument>);
+    create(dto: CreateUserDto): Promise<{
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        roles: string[];
+        createdAt: any;
+        updatedAt: any;
+    }>;
+    findAll(): Promise<{
+        id: any;
+        name: any;
+        email: any;
+        phone: any;
+        roles: any;
+        createdAt: any;
+        updatedAt: any;
+    }[]>;
+    findOne(id: string): Promise<{
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        roles: string[];
+        createdAt: any;
+        updatedAt: any;
+    }>;
+    findByEmail(email: string): Promise<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, User> & User & {
+        _id: import("mongoose").Types.ObjectId;
+    }> & import("mongoose").Document<unknown, {}, User> & User & {
+        _id: import("mongoose").Types.ObjectId;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
     }>>;
-    update(id: number, updateUserDto: UpdateUserDto): string;
-    remove(id: number): string;
+    update(id: number, dto: UpdateUserDto): Promise<void>;
+    remove(id: number): Promise<void>;
+    sanitize(u: UserDocument): {
+        id: string;
+        name: string;
+        email: string;
+        phone: string;
+        roles: string[];
+        createdAt: any;
+        updatedAt: any;
+    };
+    sanitizeLean: (u: any) => {
+        id: any;
+        name: any;
+        email: any;
+        phone: any;
+        roles: any;
+        createdAt: any;
+        updatedAt: any;
+    };
 }
