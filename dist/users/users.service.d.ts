@@ -25,7 +25,6 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from 'src/schema/user.schema';
 export declare class UsersService {
     private readonly userModel;
@@ -64,7 +63,7 @@ export declare class UsersService {
     } & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    update(id: number, dto: UpdateUserDto): Promise<void>;
+    update(id: number, dto: CreateUserDto): Promise<void>;
     remove(id: number): Promise<void>;
     sanitize(u: UserDocument): {
         id: string;

@@ -26,7 +26,10 @@ let AuthService = class AuthService {
     async registerUser(createUserDto) {
         try {
             const hash = await bcrypt.hash(createUserDto.password, 10);
-            const newUser = await this.userModel.create({ ...createUserDto, password: hash });
+            const newUser = await this.userModel.create({
+                ...createUserDto,
+                password: hash,
+            });
             return newUser;
         }
         catch (error) {
