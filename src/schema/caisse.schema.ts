@@ -18,6 +18,8 @@ export class Caisse {
   date: string;
   @Prop({ required: false })
   commentaire: string;
+  @Prop({ required: false })
+  nomutilisatuer?:string;
 }
 
 export const CaisseSchema = SchemaFactory.createForClass(Caisse);

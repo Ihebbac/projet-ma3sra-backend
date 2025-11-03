@@ -90,6 +90,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Client.prototype, "status", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Client.prototype, "nomutilisatuer", void 0);
 exports.Client = Client = __decorate([
     (0, mongoose_1.Schema)()
 ], Client);

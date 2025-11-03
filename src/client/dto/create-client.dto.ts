@@ -20,4 +20,5 @@ export class CreateClientDto {
   prixFinal?:number
   prixKg?:number
 status: 'payé' | 'non payé';
+nomutilisatuer?:string;
 }

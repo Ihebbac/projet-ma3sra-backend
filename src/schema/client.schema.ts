@@ -61,6 +61,8 @@ export class Client {
   prixKg?: number;
   @Prop()
   status: 'payé' | 'non payé';
+  @Prop()
+  nomutilisatuer?:string;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);

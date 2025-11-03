@@ -5,4 +5,5 @@ export class CreateCaisseDto {
   date: string;
   uniqueId: string;
   commentaire: string;
+  nomutilisatuer?:string;
 }
