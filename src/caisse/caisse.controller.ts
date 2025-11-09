@@ -10,41 +10,40 @@ import {
 } from '@nestjs/common';
 import { CreateCaisseDto } from './dto/create-caisse.dto';
 import { CaisseService } from './caisse.service';
-import { UpdateCaissetDto } from './dto/update-Caisse.dto';
 
 @Controller('caisse')
 export class CaisseController {
-  constructor(private readonly CaisseService: CaisseService) {}
+  constructor(private readonly caisseService: CaisseService) {}
 
   @Post()
   async create(@Body() createCaisseDto: CreateCaisseDto) {
-    return this.CaisseService.create(createCaisseDto);
+    return this.caisseService.create(createCaisseDto);
   }
 
   @Get()
   async findAll() {
-    return this.CaisseService.findAll();
+    return this.caisseService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.CaisseService.findOne(id);
+    return this.caisseService.findOne(id);
   }
 
   @Patch(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateCaisseDto: UpdateCaissetDto,
+    @Body() updateCaisseDto: CreateCaisseDto,
   ) {
-    return this.CaisseService.update(id, updateCaisseDto);
+    return this.caisseService.update(id, updateCaisseDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.CaisseService.remove(id);
+    return this.caisseService.remove(id);
   }
   @Delete('removeByUniqueId/:id')
   async removeByUniqueId(@Param('id') id: string) {
-    return this.CaisseService.removeByUniqueId(id);
+    return this.caisseService.removeByUniqueId(id);
   }
 }
