@@ -1,5 +1,6 @@
 export declare class CreateClientDto {
     nomPrenom: string;
+    commentaire: string;
     numTelephone: number;
     type: string;
     dateCreation?: Date;

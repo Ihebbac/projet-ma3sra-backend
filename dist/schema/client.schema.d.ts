@@ -45,6 +45,7 @@ export declare class Client {
     prixKg?: number;
     status: 'payé' | 'non payé';
     nomutilisatuer?: string;
+    commentaire?: string;
 }
 export declare const ClientSchema: import("mongoose").Schema<Client, import("mongoose").Model<Client, any, any, any, Document<unknown, any, Client> & Client & {
     _id: import("mongoose").Types.ObjectId;

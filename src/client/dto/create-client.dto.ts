@@ -1,6 +1,7 @@
 // create-client.dto.ts
 export class CreateClientDto {
   nomPrenom: string;
+  commentaire: string;
   
   numTelephone: number;
   type: string;

@@ -63,6 +63,8 @@ export class Client {
   status: 'payé' | 'non payé';
   @Prop()
   nomutilisatuer?:string;
+  @Prop()
+  commentaire?:string;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);
