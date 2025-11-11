@@ -16,9 +16,11 @@ export class CaisseService {
 
   async create(createCaisseDto: CreateCaisseDto): Promise<any> {
     try {
-      await this.caisseModel.findOneAndDelete({
-        uniqueId: createCaisseDto.uniqueId,
-      });
+      if (uniqueId) {
+        await this.caisseModel.findOneAndDelete({
+          uniqueId: createCaisseDto.uniqueId,
+        });
+      }
 
       const newCaisse = new this.caisseModel(createCaisseDto);
       return await newCaisse.save();
