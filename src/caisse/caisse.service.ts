@@ -16,7 +16,7 @@ export class CaisseService {
 
   async create(createCaisseDto: CreateCaisseDto): Promise<any> {
     try {
-      if (uniqueId) {
+      if (createCaisseDto?.uniqueId) {
         await this.caisseModel.findOneAndDelete({
           uniqueId: createCaisseDto.uniqueId,
         });
