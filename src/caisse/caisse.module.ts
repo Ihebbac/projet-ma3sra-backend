@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { CaisseSchema } from 'src/schema/Caisse.schema';
 import { CaisseController } from './caisse.controller';
 import { CaisseService } from './caisse.service';
+import { CaisseSchema } from 'src/schema/caisse.schema';
 
 @Module({
   imports: [

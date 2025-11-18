@@ -9,7 +9,6 @@ import { Model } from 'mongoose';
 
 import { Caisse } from 'src/schema/caisse.schema';
 import { CreateCaisseDto } from './dto/create-caisse.dto';
-import { UpdateCaissetDto } from './dto/update-Caisse.dto';
 
 @Injectable()
 export class CaisseService {
@@ -17,9 +16,11 @@ export class CaisseService {
 
   async create(createCaisseDto: CreateCaisseDto): Promise<any> {
     try {
-      await this.caisseModel.findOneAndDelete({
-        uniqueId: createCaisseDto.uniqueId,
-      });
+      if (createCaisseDto?.uniqueId) {
+        await this.caisseModel.findOneAndDelete({
+          uniqueId: createCaisseDto.uniqueId,
+        });
+      }
 
       const newCaisse = new this.caisseModel(createCaisseDto);
       return await newCaisse.save();
@@ -47,7 +48,7 @@ export class CaisseService {
     return CaisseData;
   }
 
-  async update(id: string, updateCaisseDto: UpdateCaissetDto): Promise<any> {
+  async update(id: string, updateCaisseDto: CreateCaisseDto): Promise<any> {
     const updatedCaisse = await this.caisseModel.findByIdAndUpdate(
       id,
       updateCaisseDto,
