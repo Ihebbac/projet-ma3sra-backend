@@ -9,6 +9,7 @@ import { CaissesModule } from './caisse/caisse.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { AchatModule } from './achat/achat.module';
+import { AchatBaseModule } from './achat-base/achat-base.module';
 // import { PrinterModule } from './printticket/printer.module';
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AchatModule } from './achat/achat.module';
     TransactionsModule,
     CaissesModule,
     AchatModule,
+    AchatBaseModule,
   ],
 })
 export class AppModule {}
