@@ -87,7 +87,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Client.prototype, "prixKg", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ enum: ['payé', 'non payé'], default: 'non payé' }),
     __metadata("design:type", String)
 ], Client.prototype, "status", void 0);
 __decorate([
@@ -98,6 +98,14 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Client.prototype, "commentaire", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ unique: true, sparse: true }),
+    __metadata("design:type", String)
+], Client.prototype, "publicTrackingToken", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: true }),
+    __metadata("design:type", Boolean)
+], Client.prototype, "trackingEnabled", void 0);
 exports.Client = Client = __decorate([
     (0, mongoose_1.Schema)()
 ], Client);

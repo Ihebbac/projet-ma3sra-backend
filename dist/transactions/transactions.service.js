@@ -23,7 +23,34 @@ let TransactionsService = class TransactionsService {
     }
     async create(createTransactionDto) {
         try {
-            const newTransaction = new this.transactionModel(createTransactionDto);
+            const payload = {
+                date: createTransactionDto.date || new Date(),
+                dateCreation: createTransactionDto.dateCreation || createTransactionDto.date || new Date(),
+                typeStock: createTransactionDto.typeStock,
+                type: createTransactionDto.type || createTransactionDto.typeStock,
+                quantite: Number(createTransactionDto.quantite || 0),
+                prix: Number(createTransactionDto.prix ??
+                    createTransactionDto.prixFinal ??
+                    0),
+                prixFinal: Number(createTransactionDto.prixFinal ??
+                    createTransactionDto.prix ??
+                    0),
+                motif: createTransactionDto.motif,
+                details: createTransactionDto.details || '',
+                commentaire: createTransactionDto.commentaire ||
+                    createTransactionDto.details ||
+                    '',
+                proprietaireId: createTransactionDto.proprietaireId,
+                clientNom: createTransactionDto.clientNom ||
+                    createTransactionDto.nomPrenom ||
+                    '',
+                nomPrenom: createTransactionDto.nomPrenom ||
+                    createTransactionDto.clientNom ||
+                    '',
+                operation: createTransactionDto.operation || 'retrait',
+                clientId: createTransactionDto.clientId || null,
+            };
+            const newTransaction = new this.transactionModel(payload);
             return await newTransaction.save();
         }
         catch (error) {
@@ -31,9 +58,12 @@ let TransactionsService = class TransactionsService {
         }
     }
     async findAll() {
-        const transactionsData = await this.transactionModel.find().exec();
+        const transactionsData = await this.transactionModel
+            .find()
+            .sort({ date: -1, createdAt: -1 })
+            .exec();
         if (!transactionsData || transactionsData.length === 0) {
-            throw new common_1.NotFoundException('No transactions found in the collection.');
+            return [];
         }
         return transactionsData;
     }
@@ -45,14 +75,28 @@ let TransactionsService = class TransactionsService {
         return transactionData;
     }
     async update(id, updateTransactionDto) {
-        const updatedTransaction = await this.transactionModel.findByIdAndUpdate(id, updateTransactionDto, { new: true });
+        const payload = {
+            ...updateTransactionDto,
+        };
+        if (payload.prix !== undefined) {
+            payload.prix = Number(payload.prix);
+        }
+        if (payload.prixFinal !== undefined) {
+            payload.prixFinal = Number(payload.prixFinal);
+        }
+        if (payload.quantite !== undefined) {
+            payload.quantite = Number(payload.quantite);
+        }
+        const updatedTransaction = await this.transactionModel.findByIdAndUpdate(id, payload, { new: true });
         if (!updatedTransaction) {
             throw new common_1.NotFoundException(`Transaction with ID ${id} not found for update.`);
         }
         return updatedTransaction;
     }
     async remove(id) {
-        const deletedTransaction = await this.transactionModel.findByIdAndDelete(id).exec();
+        const deletedTransaction = await this.transactionModel
+            .findByIdAndDelete(id)
+            .exec();
         if (!deletedTransaction) {
             throw new common_1.NotFoundException(`Transaction with ID ${id} not found for deletion.`);
         }

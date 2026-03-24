@@ -24,15 +24,33 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
+export type AbsenceType = 'ABSENT' | 'CONGE_NON_PAYE';
+export type AvanceMode = 'CAISSE' | 'NOTE';
 export declare class Employe extends Document {
     nom: string;
     prenom: string;
     numTel: string;
     poste: string;
-    joursPayes: any;
+    statut: string;
+    estActif: boolean;
     montantJournalier: number;
     montantHeure: number;
-    joursTravailles: any;
+    joursSemaineTravail: number[];
+    dateDebutPresence?: string;
+    dateFinPresence?: string;
+    absences: {
+        date: string;
+        type?: AbsenceType;
+        motif?: string;
+    }[];
+    avances: {
+        date: string;
+        montant: number;
+        mode: AvanceMode;
+        note?: string;
+    }[];
+    joursPayes: any[];
+    joursTravailles: any[];
 }
 export declare const EmployeSchema: import("mongoose").Schema<Employe, import("mongoose").Model<Employe, any, any, any, Document<unknown, any, Employe> & Employe & Required<{
     _id: unknown;

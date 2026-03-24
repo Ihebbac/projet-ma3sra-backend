@@ -27,6 +27,9 @@ let ClientsController = class ClientsController {
     async findAll() {
         return this.clientsService.findAll();
     }
+    async findPublicTracking(token) {
+        return this.clientsService.findPublicTrackingByToken(token);
+    }
     async updateStatus(id, body) {
         return this.clientsService.updateStatus(id, body.status);
     }
@@ -54,6 +57,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ClientsController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('public-tracking/:token'),
+    __param(0, (0, common_1.Param)('token')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClientsController.prototype, "findPublicTracking", null);
 __decorate([
     (0, common_1.Patch)(':id/status'),
     __param(0, (0, common_1.Param)('id')),

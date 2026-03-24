@@ -32,20 +32,67 @@ __decorate([
     __metadata("design:type", String)
 ], Employe.prototype, "poste", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Array, default: [] }),
-    __metadata("design:type", Object)
-], Employe.prototype, "joursPayes", void 0);
+    (0, mongoose_1.Prop)({ default: '' }),
+    __metadata("design:type", String)
+], Employe.prototype, "statut", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Boolean, default: true }),
+    __metadata("design:type", Boolean)
+], Employe.prototype, "estActif", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Employe.prototype, "montantJournalier", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: false }),
+    (0, mongoose_1.Prop)({ required: false, default: 0 }),
     __metadata("design:type", Number)
 ], Employe.prototype, "montantHeure", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Array }),
-    __metadata("design:type", Object)
+    (0, mongoose_1.Prop)({ type: [Number], default: [0, 1, 2, 3, 4, 5, 6] }),
+    __metadata("design:type", Array)
+], Employe.prototype, "joursSemaineTravail", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: String, default: null }),
+    __metadata("design:type", String)
+], Employe.prototype, "dateDebutPresence", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: String, default: null }),
+    __metadata("design:type", String)
+], Employe.prototype, "dateFinPresence", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [
+            {
+                date: { type: String, required: true },
+                type: { type: String, default: 'ABSENT' },
+                motif: { type: String },
+            },
+        ],
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], Employe.prototype, "absences", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [
+            {
+                date: { type: String, required: true },
+                montant: { type: Number, required: true },
+                mode: { type: String, default: 'NOTE' },
+                note: { type: String },
+            },
+        ],
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], Employe.prototype, "avances", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Array, default: [] }),
+    __metadata("design:type", Array)
+], Employe.prototype, "joursPayes", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Array, default: [] }),
+    __metadata("design:type", Array)
 ], Employe.prototype, "joursTravailles", void 0);
 exports.Employe = Employe = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })

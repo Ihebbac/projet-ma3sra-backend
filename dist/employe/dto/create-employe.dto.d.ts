@@ -3,7 +3,10 @@ export declare class CreateEmployeDto {
     prenom: string;
     numTel: string;
     poste: string;
-    statut: string;
+    statut?: string;
     montantJournalier: number;
-    montantHeure: number;
+    montantHeure?: number;
+    dateDebutPresence?: string | null;
+    dateFinPresence?: string | null;
+    joursSemaineTravail?: number[];
 }

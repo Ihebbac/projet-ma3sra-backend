@@ -14,22 +14,49 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FitouraController = void 0;
 const common_1 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const path_1 = require("path");
 const fitoura_service_1 = require("./fitoura.service");
 const create_fitoura_dto_1 = require("./dto/create-fitoura.dto");
 const update_fitoura_dto_1 = require("./dto/update-fitoura.dto");
-const update_fitoura_manuelle_dto_ts_1 = require("./dto/update-fitoura-manuelle.dto.ts");
+const update_fitoura_manuelle_dto_1 = require("./dto/update-fitoura-manuelle.dto");
+function editFileName(req, file, callback) {
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    const fileExtName = (0, path_1.extname)(file.originalname);
+    const baseName = file.originalname
+        .replace(fileExtName, '')
+        .replace(/\s+/g, '_')
+        .replace(/[^\w\-]/g, '');
+    callback(null, `${baseName}-${uniqueSuffix}${fileExtName}`);
+}
+function fileFilter(req, file, callback) {
+    callback(null, true);
+}
 let FitouraController = class FitouraController {
     constructor(fitouraService) {
         this.fitouraService = fitouraService;
     }
-    createEntree(dto) {
-        return this.fitouraService.enregistrerEntree(dto);
+    createEntree(dto, files) {
+        return this.fitouraService.enregistrerEntree(dto, files || []);
     }
     updateSortie(id, dto) {
         return this.fitouraService.enregistrerSortie(id, dto);
     }
     modifierFitouraManuellement(id, dto) {
         return this.fitouraService.modifierFitouraManuellement(id, dto);
+    }
+    addAttachments(id, files) {
+        return this.fitouraService.addAttachments(id, files || []);
+    }
+    removeAttachment(id, attachmentId) {
+        return this.fitouraService.removeAttachment(id, attachmentId);
+    }
+    searchCamions(search) {
+        return this.fitouraService.searchCamions(search || '');
+    }
+    searchChauffeurs(search) {
+        return this.fitouraService.searchChauffeurs(search || '');
     }
     findAll() {
         return this.fitouraService.findAll();
@@ -44,9 +71,18 @@ let FitouraController = class FitouraController {
 exports.FitouraController = FitouraController;
 __decorate([
     (0, common_1.Post)('entree'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('attachments', 10, {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads/fitoura',
+            filename: editFileName,
+        }),
+        fileFilter,
+        limits: { fileSize: 10 * 1024 * 1024 },
+    })),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFiles)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_fitoura_dto_1.CreateFitouraDto]),
+    __metadata("design:paramtypes", [create_fitoura_dto_1.CreateFitouraDto, Array]),
     __metadata("design:returntype", void 0)
 ], FitouraController.prototype, "createEntree", null);
 __decorate([
@@ -62,9 +98,47 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_fitoura_manuelle_dto_ts_1.UpdateFitouraManuelleDto]),
+    __metadata("design:paramtypes", [String, update_fitoura_manuelle_dto_1.UpdateFitouraManuelleDto]),
     __metadata("design:returntype", void 0)
 ], FitouraController.prototype, "modifierFitouraManuellement", null);
+__decorate([
+    (0, common_1.Post)(':id/attachments'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('attachments', 10, {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads/fitoura',
+            filename: editFileName,
+        }),
+        fileFilter,
+        limits: { fileSize: 10 * 1024 * 1024 },
+    })),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.UploadedFiles)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Array]),
+    __metadata("design:returntype", void 0)
+], FitouraController.prototype, "addAttachments", null);
+__decorate([
+    (0, common_1.Delete)(':id/attachments/:attachmentId'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Param)('attachmentId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], FitouraController.prototype, "removeAttachment", null);
+__decorate([
+    (0, common_1.Get)('options/camions'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FitouraController.prototype, "searchCamions", null);
+__decorate([
+    (0, common_1.Get)('options/chauffeurs'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FitouraController.prototype, "searchChauffeurs", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

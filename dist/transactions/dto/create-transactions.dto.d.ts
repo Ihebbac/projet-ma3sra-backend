@@ -1,10 +1,17 @@
 export declare class CreateTransactionDto {
     date: Date;
+    dateCreation?: Date;
     typeStock: 'olive' | 'huile';
+    type?: 'olive' | 'huile';
     quantite: number;
-    clientNom: string;
+    prix: number;
+    prixFinal?: number;
     motif: string;
     details?: string;
+    commentaire?: string;
     proprietaireId: string;
-    clientId: string;
+    clientNom?: string;
+    nomPrenom?: string;
+    operation?: 'ajout' | 'retrait';
+    clientId?: string | null;
 }

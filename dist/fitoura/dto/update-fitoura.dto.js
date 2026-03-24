@@ -10,12 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateFitouraDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class UpdateFitouraDto {
 }
 exports.UpdateFitouraDto = UpdateFitouraDto;
 __decorate([
     (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => value === '' || value === null || value === undefined
+        ? undefined
+        : Number(value)),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateFitouraDto.prototype, "poidsSortie", void 0);

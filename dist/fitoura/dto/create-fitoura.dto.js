@@ -10,24 +10,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateFitouraDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class CreateFitouraDto {
 }
 exports.CreateFitouraDto = CreateFitouraDto;
 __decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => (value === '' ? undefined : value)),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateFitouraDto.prototype, "matriculeCamion", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => (value === '' ? undefined : value)),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateFitouraDto.prototype, "chauffeur", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => value === '' || value === null || value === undefined
+        ? undefined
+        : Number(value)),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateFitouraDto.prototype, "poidsEntree", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => value === '' || value === null || value === undefined
+        ? undefined
+        : Number(value)),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateFitouraDto.prototype, "poidsSortie", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Transform)(({ value }) => value === '' || value === null || value === undefined
+        ? undefined
+        : Number(value)),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateFitouraDto.prototype, "prixUnitaire", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsIn)(['EN_COURS', 'TERMINE']),
+    __metadata("design:type", String)
+], CreateFitouraDto.prototype, "status", void 0);
 //# sourceMappingURL=create-fitoura.dto.js.map

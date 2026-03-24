@@ -25,7 +25,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://ihebbaccouch1999_db_user:zBw4eO4ppBq5XYeq@cluster0.fo8llat.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://ihebbaccouch1999_db_user:MxD8T4SmyMA5rYwM@cluster1.1btl2fd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1'),
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             clients_module_1.ClientsModule,
@@ -33,7 +33,7 @@ exports.AppModule = AppModule = __decorate([
             fitoura_module_1.FitouraModule,
             employe_module_1.EmployeModule,
             prop_module_2.TransactionsModule,
-            caisse_module_1.CaissesModule,
+            caisse_module_1.CaisseModule,
             achat_module_1.AchatModule,
             achat_base_module_1.AchatBaseModule,
         ],

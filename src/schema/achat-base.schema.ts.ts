@@ -1,53 +1,60 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Document } from 'mongoose';
 
-export type AchatBaseDocument = HydratedDocument<AchatBase>;
+export type AchatBaseDocument = AchatBase & Document;
 
 @Schema({ timestamps: true })
 export class AchatBase {
-    @Prop({ required: true, type: String })
-    dateAchat: string;
+  @Prop({ required: true })
+  dateAchat: string;
 
-    @Prop({ required: true, type: String })
-    nomPrenom: string;
+  @Prop({ required: true })
+  nomPrenom: string;
 
-    @Prop({ required: false, type: String })
-    numTel?: string;
+  @Prop()
+  numTel?: string;
 
-    @Prop({ required: true, type: Number })
-    nbreCaisse: number;
+  @Prop({ required: true })
+  nbreCaisse: number;
 
-    @Prop({ required: true, type: Number })
-    poidWiba: number;
-    
-    @Prop({ required: true, type: Number })
-    quantiteOliveBrute: number;
+  @Prop({ required: true })
+  poidWiba: number;
 
-    @Prop({ required: true, type: Number })
-    prixBase: number; // Prix d'achat de l'huile (Dinar)
+  @Prop({ required: true })
+  quantiteOliveBrute: number;
 
-    // Champs CALCULÉS, nécessaires pour la transaction et l'historique
-    
-    @Prop({ required: true, type: Number })
-    quantiteOliveNet: number; // Olive Brute - Poids Caisses
+  @Prop({ required: true })
+  prixBase: number;
 
-    @Prop({ required: true, type: Number })
-    quantiteHuileNet: number; // Huile réelle produite = (Olive Net / Poid Wiba)
+  @Prop({ required: true })
+  quantiteOliveNet: number;
 
-    @Prop({ required: true, type: Number })
-    nisba: number; // Rendement : Huile Net / Olive Net
+  @Prop({ required: true })
+  quantiteHuileNet: number;
 
-    @Prop({ required: true, type: Number })
-    ktou3: number; // Facteur de conversion : (Huile Net / 9.09) / (Olive Net / 432)
+  @Prop({ required: true })
+  nisba: number;
 
-    @Prop({ required: true, type: Number })
-    coutAchatClient: number; // Huile Net * Prix Base (Ce qui est payé au client)
-    
-    @Prop({ required: true, type: Number })
-    fraisTransformation: number; // Différence affichée pour la transparence (exemple)
+  @Prop({ required: true })
+  ktou3: number;
 
-    @Prop({ required: true, type: Number })
-    prixTotalVenteHuile: number; // Huile Net * Prix Base (avec frais)
+  @Prop({ required: true })
+  coutAchatClient: number;
+
+  @Prop({ required: true })
+  fraisTransformation: number;
+
+  @Prop({ required: true })
+  prixTotalVenteHuile: number;
+
+  @Prop()
+  poidsHuileNetReel?: number;
+
+  @Prop()
+  nombreQfza?: number;
+
+  @Prop({ default: false })
+  isPaid: boolean;
 }
 
 export const AchatBaseSchema = SchemaFactory.createForClass(AchatBase);

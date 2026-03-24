@@ -23,9 +23,9 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
+import { Model } from 'mongoose';
 import { CreateTransactionDto } from './dto/create-transactions.dto';
 import { UpdateTransactionDto } from './dto/update-prop.dto';
-import { Model } from 'mongoose';
 import { ITransaction } from 'src/interfaces/transaction.interface';
 export declare class TransactionsService {
     private transactionModel;

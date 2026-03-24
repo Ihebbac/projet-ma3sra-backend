@@ -9,48 +9,90 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FitouraSchema = exports.Fitoura = void 0;
+exports.FitouraSchema = exports.Fitoura = exports.FitouraAttachmentSchema = exports.FitouraAttachment = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+let FitouraAttachment = class FitouraAttachment {
+};
+exports.FitouraAttachment = FitouraAttachment;
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], FitouraAttachment.prototype, "originalName", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], FitouraAttachment.prototype, "filename", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], FitouraAttachment.prototype, "path", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], FitouraAttachment.prototype, "mimetype", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], FitouraAttachment.prototype, "size", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: Date.now }),
+    __metadata("design:type", Date)
+], FitouraAttachment.prototype, "uploadedAt", void 0);
+exports.FitouraAttachment = FitouraAttachment = __decorate([
+    (0, mongoose_1.Schema)({ _id: true, timestamps: false })
+], FitouraAttachment);
+exports.FitouraAttachmentSchema = mongoose_1.SchemaFactory.createForClass(FitouraAttachment);
 let Fitoura = class Fitoura extends mongoose_2.Document {
 };
 exports.Fitoura = Fitoura;
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)({ trim: true, default: null }),
     __metadata("design:type", String)
 ], Fitoura.prototype, "matriculeCamion", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)({ trim: true, default: null }),
     __metadata("design:type", String)
 ], Fitoura.prototype, "chauffeur", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Number, required: true }),
+    (0, mongoose_1.Prop)({ type: Number, default: null }),
     __metadata("design:type", Number)
 ], Fitoura.prototype, "poidsEntree", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Number }),
+    (0, mongoose_1.Prop)({ type: Number, default: null }),
     __metadata("design:type", Number)
 ], Fitoura.prototype, "poidsSortie", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Number }),
+    (0, mongoose_1.Prop)({ type: Number, default: null }),
     __metadata("design:type", Number)
 ], Fitoura.prototype, "poidsNet", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Number, required: true }),
+    (0, mongoose_1.Prop)({ type: Number, default: null }),
     __metadata("design:type", Number)
 ], Fitoura.prototype, "prixUnitaire", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: Number }),
+    (0, mongoose_1.Prop)({ type: Number, default: null }),
     __metadata("design:type", Number)
 ], Fitoura.prototype, "montantTotal", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, enum: ['EN_COURS', 'TERMINE'], default: 'EN_COURS' }),
+    (0, mongoose_1.Prop)({
+        type: String,
+        enum: ['EN_COURS', 'TERMINE'],
+        default: 'EN_COURS',
+    }),
     __metadata("design:type", String)
 ], Fitoura.prototype, "status", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ default: null }),
     __metadata("design:type", Date)
 ], Fitoura.prototype, "dateSortie", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [exports.FitouraAttachmentSchema],
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], Fitoura.prototype, "attachments", void 0);
 exports.Fitoura = Fitoura = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
 ], Fitoura);

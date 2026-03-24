@@ -23,18 +23,23 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 export declare class Transaction {
     date: Date;
-    typeStock: string;
+    dateCreation?: Date;
+    typeStock: 'olive' | 'huile';
+    type?: 'olive' | 'huile';
     quantite: number;
-    clientNom: string;
+    prix: number;
+    prixFinal?: number;
     motif: string;
-    details: string;
+    details?: string;
+    commentaire?: string;
     proprietaireId: string;
-    clientId: string;
-    createdAt: Date;
-    updatedAt: Date;
+    clientNom?: string;
+    nomPrenom?: string;
+    operation?: 'ajout' | 'retrait';
+    clientId?: string | null;
 }
 export declare const TransactionSchema: import("mongoose").Schema<Transaction, import("mongoose").Model<Transaction, any, any, any, Document<unknown, any, Transaction> & Transaction & {
     _id: import("mongoose").Types.ObjectId;

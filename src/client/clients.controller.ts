@@ -1,18 +1,17 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Body, 
-  Patch, 
-  Param, 
-  Delete, 
-  NotFoundException 
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 
-@Controller('clients') 
+@Controller('clients')
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
 
@@ -25,6 +24,12 @@ export class ClientsController {
   async findAll() {
     return this.clientsService.findAll();
   }
+
+  @Get('public-tracking/:token')
+  async findPublicTracking(@Param('token') token: string) {
+    return this.clientsService.findPublicTrackingByToken(token);
+  }
+
   @Patch(':id/status')
   async updateStatus(
     @Param('id') id: string,

@@ -15,21 +15,33 @@ let Transaction = class Transaction {
 };
 exports.Transaction = Transaction;
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)({ required: true, default: Date.now }),
     __metadata("design:type", Date)
 ], Transaction.prototype, "date", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: Date.now }),
+    __metadata("design:type", Date)
+], Transaction.prototype, "dateCreation", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true, enum: ['olive', 'huile'] }),
     __metadata("design:type", String)
 ], Transaction.prototype, "typeStock", void 0);
 __decorate([
+    (0, mongoose_1.Prop)({ enum: ['olive', 'huile'] }),
+    __metadata("design:type", String)
+], Transaction.prototype, "type", void 0);
+__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Transaction.prototype, "quantite", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Transaction.prototype, "clientNom", void 0);
+    (0, mongoose_1.Prop)({ required: true, default: 0 }),
+    __metadata("design:type", Number)
+], Transaction.prototype, "prix", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: 0 }),
+    __metadata("design:type", Number)
+], Transaction.prototype, "prixFinal", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
@@ -39,23 +51,31 @@ __decorate([
     __metadata("design:type", String)
 ], Transaction.prototype, "details", void 0);
 __decorate([
+    (0, mongoose_1.Prop)({ default: '' }),
+    __metadata("design:type", String)
+], Transaction.prototype, "commentaire", void 0);
+__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Transaction.prototype, "proprietaireId", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)({ default: '' }),
+    __metadata("design:type", String)
+], Transaction.prototype, "clientNom", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: '' }),
+    __metadata("design:type", String)
+], Transaction.prototype, "nomPrenom", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ enum: ['ajout', 'retrait'], default: 'retrait' }),
+    __metadata("design:type", String)
+], Transaction.prototype, "operation", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: null }),
     __metadata("design:type", String)
 ], Transaction.prototype, "clientId", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ default: Date.now }),
-    __metadata("design:type", Date)
-], Transaction.prototype, "createdAt", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ default: Date.now }),
-    __metadata("design:type", Date)
-], Transaction.prototype, "updatedAt", void 0);
 exports.Transaction = Transaction = __decorate([
-    (0, mongoose_1.Schema)()
+    (0, mongoose_1.Schema)({ timestamps: true })
 ], Transaction);
 exports.TransactionSchema = mongoose_1.SchemaFactory.createForClass(Transaction);
 //# sourceMappingURL=transaction.schema.js.map

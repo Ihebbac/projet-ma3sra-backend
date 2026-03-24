@@ -21,8 +21,11 @@ let EmployeController = class EmployeController {
     constructor(employeService) {
         this.employeService = employeService;
     }
-    create(createEmployeDto) {
-        return this.employeService.create(createEmployeDto);
+    create(dto) {
+        return this.employeService.create(dto);
+    }
+    payer(id, body) {
+        return this.employeService.marquerJourCommePaye(id, body);
     }
     findAll() {
         return this.employeService.findAll();
@@ -30,25 +33,26 @@ let EmployeController = class EmployeController {
     findOne(id) {
         return this.employeService.findOne(id);
     }
-    updatePut(id, updateEmployeDto) {
-        return this.employeService.update(id, updateEmployeDto);
-    }
-    async marquerCommePaye(id, date) {
-        return this.employeService.marquerJourCommePaye(id, date);
-    }
-    updatePatch(id, updateEmployeDto) {
-        return this.employeService.update(id, updateEmployeDto);
+    update(id, dto) {
+        return this.employeService.update(id, dto);
     }
     remove(id) {
         return this.employeService.remove(id);
     }
-    markPresence(id) {
-        return this.employeService.markPresence(id);
+    addAbsence(id, body) {
+        return this.employeService.addAbsence(id, body.date, body.motif, body.type ?? 'ABSENT');
     }
-    calculSalaire(id, start, end) {
-        const startDate = start ? new Date(start) : undefined;
-        const endDate = end ? new Date(end) : undefined;
-        return this.employeService.calculSalaire(id, startDate, endDate);
+    removeAbsence(id, date) {
+        return this.employeService.removeAbsence(id, date);
+    }
+    addAdvance(id, body) {
+        return this.employeService.addAdvance(id, body);
+    }
+    resume(id, month) {
+        return this.employeService.resumeMensuel(id, month);
+    }
+    resumeAll(month) {
+        return this.employeService.resumeMensuelAll(month);
     }
 };
 exports.EmployeController = EmployeController;
@@ -59,6 +63,14 @@ __decorate([
     __metadata("design:paramtypes", [create_employe_dto_1.CreateEmployeDto]),
     __metadata("design:returntype", void 0)
 ], EmployeController.prototype, "create", null);
+__decorate([
+    (0, common_1.Put)(':id/payer'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], EmployeController.prototype, "payer", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -77,25 +89,9 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", void 0)
-], EmployeController.prototype, "updatePut", null);
-__decorate([
-    (0, common_1.Put)(':id/payer'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)('date')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", Promise)
-], EmployeController.prototype, "marquerCommePaye", null);
-__decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_employe_dto_1.UpdateEmployeDto]),
     __metadata("design:returntype", void 0)
-], EmployeController.prototype, "updatePatch", null);
+], EmployeController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -104,21 +100,44 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], EmployeController.prototype, "remove", null);
 __decorate([
-    (0, common_1.Post)(':id/presence'),
+    (0, common_1.Post)(':id/absence'),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], EmployeController.prototype, "addAbsence", null);
+__decorate([
+    (0, common_1.Delete)(':id/absence'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Query)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], EmployeController.prototype, "removeAbsence", null);
+__decorate([
+    (0, common_1.Post)(':id/avance'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], EmployeController.prototype, "addAdvance", null);
+__decorate([
+    (0, common_1.Get)(':id/resume'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Query)('month')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], EmployeController.prototype, "resume", null);
+__decorate([
+    (0, common_1.Get)('resume/all'),
+    __param(0, (0, common_1.Query)('month')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], EmployeController.prototype, "markPresence", null);
-__decorate([
-    (0, common_1.Get)(':id/salaire'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Query)('start')),
-    __param(2, (0, common_1.Query)('end')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String]),
-    __metadata("design:returntype", void 0)
-], EmployeController.prototype, "calculSalaire", null);
+], EmployeController.prototype, "resumeAll", null);
 exports.EmployeController = EmployeController = __decorate([
     (0, common_1.Controller)('employes'),
     __metadata("design:paramtypes", [employe_service_1.EmployeService])

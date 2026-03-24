@@ -36,6 +36,7 @@ __decorate([
 ], CreateEmployeDto.prototype, "poste", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], CreateEmployeDto.prototype, "statut", void 0);
 __decorate([
@@ -44,6 +45,27 @@ __decorate([
 ], CreateEmployeDto.prototype, "montantJournalier", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], CreateEmployeDto.prototype, "montantHeure", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Matches)(/^\d{4}-\d{2}-\d{2}$/, { message: 'dateDebutPresence doit être YYYY-MM-DD' }),
+    __metadata("design:type", String)
+], CreateEmployeDto.prototype, "dateDebutPresence", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Matches)(/^\d{4}-\d{2}-\d{2}$/, { message: 'dateFinPresence doit être YYYY-MM-DD' }),
+    __metadata("design:type", String)
+], CreateEmployeDto.prototype, "dateFinPresence", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)({ each: true }),
+    (0, class_validator_1.Min)(0, { each: true }),
+    (0, class_validator_1.Max)(6, { each: true }),
+    __metadata("design:type", Array)
+], CreateEmployeDto.prototype, "joursSemaineTravail", void 0);
 //# sourceMappingURL=create-employe.dto.js.map

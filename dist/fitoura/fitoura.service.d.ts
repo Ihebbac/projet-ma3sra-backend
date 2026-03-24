@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 /// <reference types="mongoose/types/aggregate" />
 /// <reference types="mongoose/types/callback" />
 /// <reference types="mongoose/types/collection" />
@@ -27,13 +28,20 @@ import { Model } from 'mongoose';
 import { FitouraInterface } from '../interfaces/fitoura.interface';
 import { CreateFitouraDto } from './dto/create-fitoura.dto';
 import { UpdateFitouraDto } from './dto/update-fitoura.dto';
-import { UpdateFitouraManuelleDto } from './dto/update-fitoura-manuelle.dto.ts';
+import { UpdateFitouraManuelleDto } from './dto/update-fitoura-manuelle.dto';
 export declare class FitouraService {
     private readonly fitouraModel;
     constructor(fitouraModel: Model<FitouraInterface>);
-    enregistrerEntree(dto: CreateFitouraDto): Promise<FitouraInterface>;
+    private normalizeString;
+    private recalculate;
+    private mapFiles;
+    enregistrerEntree(dto: CreateFitouraDto, files?: Express.Multer.File[]): Promise<FitouraInterface>;
     enregistrerSortie(id: string, dto: UpdateFitouraDto): Promise<FitouraInterface>;
     modifierFitouraManuellement(id: string, dto: UpdateFitouraManuelleDto): Promise<FitouraInterface>;
+    addAttachments(id: string, files?: Express.Multer.File[]): Promise<FitouraInterface>;
+    removeAttachment(id: string, attachmentId: string): Promise<FitouraInterface>;
+    searchCamions(search?: string): Promise<string[]>;
+    searchChauffeurs(search?: string): Promise<string[]>;
     findAll(): Promise<FitouraInterface[]>;
     findOne(id: string): Promise<FitouraInterface>;
     delete(id: string): Promise<void>;

@@ -6,6 +6,7 @@ export declare class ClientsController {
     constructor(clientsService: ClientsService);
     create(createClientDto: CreateClientDto): Promise<any>;
     findAll(): Promise<any[]>;
+    findPublicTracking(token: string): Promise<any>;
     updateStatus(id: string, body: {
         status: 'payé' | 'non payé';
     }): Promise<any>;

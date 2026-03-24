@@ -1,8 +1,7 @@
-// create-client.dto.ts
 export class CreateClientDto {
   nomPrenom: string;
   commentaire: string;
-  
+
   numTelephone: number;
   type: string;
   dateCreation?: Date;
@@ -18,8 +17,8 @@ export class CreateClientDto {
   nombreWiba?: number;
   nombreQfza?: number;
   huileParQfza?: number;
-  prixFinal?:number
-  prixKg?:number
-status: 'payé' | 'non payé';
-nomutilisatuer?:string;
+  prixFinal?: number;
+  prixKg?: number;
+  status: 'payé' | 'non payé';
+  nomutilisatuer?: string;
 }

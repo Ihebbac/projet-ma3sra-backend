@@ -24,16 +24,32 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Document } from 'mongoose';
+export declare class FitouraAttachment {
+    originalName: string;
+    filename: string;
+    path: string;
+    mimetype: string;
+    size: number;
+    uploadedAt: Date;
+}
+export declare const FitouraAttachmentSchema: import("mongoose").Schema<FitouraAttachment, import("mongoose").Model<FitouraAttachment, any, any, any, Document<unknown, any, FitouraAttachment> & FitouraAttachment & {
+    _id: import("mongoose").Types.ObjectId;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, FitouraAttachment, Document<unknown, {}, import("mongoose").FlatRecord<FitouraAttachment>> & import("mongoose").FlatRecord<FitouraAttachment> & {
+    _id: import("mongoose").Types.ObjectId;
+}>;
 export declare class Fitoura extends Document {
-    matriculeCamion: string;
-    chauffeur: string;
-    poidsEntree: number;
-    poidsSortie?: number;
-    poidsNet?: number;
-    prixUnitaire: number;
-    montantTotal?: number;
+    matriculeCamion?: string | null;
+    chauffeur?: string | null;
+    poidsEntree?: number | null;
+    poidsSortie?: number | null;
+    poidsNet?: number | null;
+    prixUnitaire?: number | null;
+    montantTotal?: number | null;
     status: string;
-    dateSortie?: Date;
+    dateSortie?: Date | null;
+    attachments: FitouraAttachment[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 export declare const FitouraSchema: import("mongoose").Schema<Fitoura, import("mongoose").Model<Fitoura, any, any, any, Document<unknown, any, Fitoura> & Fitoura & Required<{
     _id: unknown;

@@ -1,20 +1,15 @@
-// client.schema.ts
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Client {
   @Prop({ required: true })
   nomPrenom: string;
 
-  // @Prop({ required: true, sparse: true })
-  // numCIN: number;
-
   @Prop({ required: true })
   numTelephone: number;
 
   @Prop({ required: true })
-  type: string; 
+  type: string;
 
   @Prop()
   dateCreation: Date;
@@ -23,21 +18,20 @@ export class Client {
   nombreCaisses: number;
 
   @Prop()
-  quantiteOlive: number; 
-  
-  @Prop()
-  quantiteOliveNet: number; 
+  quantiteOlive: number;
 
   @Prop()
-  quantiteHuile: number; 
+  quantiteOliveNet: number;
 
   @Prop()
-  kattou3: number; 
+  quantiteHuile: number;
 
   @Prop()
-  nisba: number; 
+  kattou3: number;
 
-  
+  @Prop()
+  nisba: number;
+
   @Prop()
   nisbaReelle?: number;
 
@@ -45,26 +39,37 @@ export class Client {
   quantiteHuileTheorique?: number;
 
   @Prop()
-  differenceHuile?: number; 
+  differenceHuile?: number;
 
   @Prop()
-  nombreWiba?: number; 
+  nombreWiba?: number;
 
   @Prop()
-  nombreQfza?: number; 
+  nombreQfza?: number;
 
   @Prop()
   huileParQfza?: number;
+
   @Prop()
   prixFinal?: number;
+
   @Prop()
   prixKg?: number;
-  @Prop()
+
+  @Prop({ enum: ['payé', 'non payé'], default: 'non payé' })
   status: 'payé' | 'non payé';
+
   @Prop()
-  nomutilisatuer?:string;
+  nomutilisatuer?: string;
+
   @Prop()
-  commentaire?:string;
+  commentaire?: string;
+
+  @Prop({ unique: true, sparse: true })
+  publicTrackingToken?: string;
+
+  @Prop({ default: true })
+  trackingEnabled?: boolean;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);

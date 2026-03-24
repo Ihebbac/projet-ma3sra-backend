@@ -26,13 +26,20 @@
 import { Document } from 'mongoose';
 export interface ITransaction extends Document {
     date: Date;
+    dateCreation?: Date;
     typeStock: 'olive' | 'huile';
+    type?: 'olive' | 'huile';
     quantite: number;
-    clientNom: string;
+    prix: number;
+    prixFinal?: number;
     motif: string;
-    details: string;
+    details?: string;
+    commentaire?: string;
     proprietaireId: string;
-    clientId: string;
-    createdAt: Date;
-    updatedAt: Date;
+    clientNom?: string;
+    nomPrenom?: string;
+    operation?: 'ajout' | 'retrait';
+    clientId?: string | null;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

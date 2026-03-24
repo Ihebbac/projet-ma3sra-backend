@@ -23,18 +23,23 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
+import { Model } from 'mongoose';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
-import { Model } from 'mongoose';
-import { IClient } from 'src/interfaces/client.interface';
+import { CaisseService } from 'src/caisse/caisse.service';
 export declare class ClientsService {
     private clientModel;
-    constructor(clientModel: Model<IClient>);
+    private readonly caisseService;
+    constructor(clientModel: Model<any>, caisseService: CaisseService);
+    private generatePublicTrackingToken;
+    private buildPublicTrackingResponse;
+    private ensureTrackingAccessAllowed;
     create(createClientDto: CreateClientDto): Promise<any>;
     findAll(): Promise<any[]>;
     findOne(id: string): Promise<any>;
-    update(id: string, updateClientDto: UpdateClientDto): Promise<any>;
+    findPublicTrackingByToken(token: string): Promise<any>;
     updateStatus(id: string, status: 'payé' | 'non payé'): Promise<any>;
+    update(id: string, updateClientDto: UpdateClientDto): Promise<any>;
     remove(id: string): Promise<{
         message: string;
     }>;

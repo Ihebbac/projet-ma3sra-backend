@@ -30,18 +30,122 @@ import { UpdateEmployeDto } from './dto/update-employe.dto';
 export declare class EmployeController {
     private readonly employeService;
     constructor(employeService: EmployeService);
-    create(createEmployeDto: CreateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
-    findAll(): Promise<import("../schema/employe.schema").Employe[]>;
-    findOne(id: string): Promise<import("../schema/employe.schema").Employe>;
-    updatePut(id: string, updateEmployeDto: any): Promise<any>;
-    marquerCommePaye(id: string, date: string): Promise<{
+    create(dto: CreateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
+    payer(id: string, body: {
+        date: string;
+        heuresSup?: number;
+        mode?: 'CAISSE' | 'NOTE';
+        commentaire?: string;
+        montant?: number;
+    }): Promise<{
         success: boolean;
         employe: import("mongoose").Document<unknown, {}, import("../schema/employe.schema").Employe> & import("../schema/employe.schema").Employe & Required<{
             _id: unknown;
         }>;
     }>;
-    updatePatch(id: string, updateEmployeDto: UpdateEmployeDto): Promise<any>;
+    findAll(): Promise<import("../schema/employe.schema").Employe[]>;
+    findOne(id: string): Promise<import("../schema/employe.schema").Employe>;
+    update(id: string, dto: UpdateEmployeDto): Promise<import("../schema/employe.schema").Employe>;
     remove(id: string): Promise<void>;
-    markPresence(id: string): Promise<import("../schema/employe.schema").Employe>;
-    calculSalaire(id: string, start?: string, end?: string): Promise<number>;
+    addAbsence(id: string, body: {
+        date: string;
+        motif?: string;
+        type?: 'ABSENT' | 'CONGE_NON_PAYE';
+    }): Promise<import("mongoose").Document<unknown, {}, import("../schema/employe.schema").Employe> & import("../schema/employe.schema").Employe & Required<{
+        _id: unknown;
+    }>>;
+    removeAbsence(id: string, date: string): Promise<import("mongoose").Document<unknown, {}, import("../schema/employe.schema").Employe> & import("../schema/employe.schema").Employe & Required<{
+        _id: unknown;
+    }>>;
+    addAdvance(id: string, body: {
+        date: string;
+        montant: number;
+        mode: 'CAISSE' | 'NOTE';
+        note?: string;
+    }): Promise<import("mongoose").Document<unknown, {}, import("../schema/employe.schema").Employe> & import("../schema/employe.schema").Employe & Required<{
+        _id: unknown;
+    }>>;
+    resume(id: string, month: string): Promise<{
+        employeId: unknown;
+        nom: string;
+        prenom: string;
+        poste: string;
+        month: string;
+        plannedDays: number;
+        absences: number;
+        workedDays: number;
+        base: number;
+        brut: number;
+        totalAdvances: number;
+        net: number;
+        window: {
+            start: string;
+            end: string;
+        };
+        details?: undefined;
+    } | {
+        employeId: unknown;
+        nom: string;
+        prenom: string;
+        poste: string;
+        month: string;
+        plannedDays: number;
+        absences: any;
+        workedDays: number;
+        base: number;
+        brut: number;
+        totalAdvances: any;
+        net: number;
+        details: {
+            absences: any;
+            avances: any;
+        };
+        window: {
+            start: string;
+            end: string;
+        };
+    }>;
+    resumeAll(month: string): Promise<{
+        month: string;
+        items: ({
+            employeId: unknown;
+            nom: string;
+            prenom: string;
+            poste: string;
+            month: string;
+            plannedDays: number;
+            absences: number;
+            workedDays: number;
+            base: number;
+            brut: number;
+            totalAdvances: number;
+            net: number;
+            window: {
+                start: string;
+                end: string;
+            };
+            details?: undefined;
+        } | {
+            employeId: unknown;
+            nom: string;
+            prenom: string;
+            poste: string;
+            month: string;
+            plannedDays: number;
+            absences: any;
+            workedDays: number;
+            base: number;
+            brut: number;
+            totalAdvances: any;
+            net: number;
+            details: {
+                absences: any;
+                avances: any;
+            };
+            window: {
+                start: string;
+                end: string;
+            };
+        })[];
+    }>;
 }
